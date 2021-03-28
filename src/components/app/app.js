@@ -7,18 +7,10 @@ const App = () => (
   <Router>
     <Switch>
       <Route exact path="/">
-        <div>
-          <code>/</code>
-          {' '}
-          placeholder
-        </div>
+        Home
       </Route>
       <Route path="/search">
-        <div>
-          <code>/search</code>
-          {' '}
-          placeholder
-        </div>
+        Search
       </Route>
     </Switch>
   </Router>
