@@ -20,7 +20,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: "montserrat";
+    font-family: ${(props) => props.theme.font.default};
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: ${(props) => props.theme.font.headline}
   }
 `;
 
