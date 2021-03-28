@@ -1,10 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import 'normalize.css';
-import '../../styles/global.css';
+import { Normalize } from 'styled-normalize';
+import GlobalStyle from '../global-style';
 
 const App = () => (
   <Router>
+    <Normalize />
+    <GlobalStyle />
     <Switch>
       <Route exact path="/">
         Home
