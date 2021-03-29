@@ -19,8 +19,21 @@ const GlobalStyle = createGlobalStyle`
          local("Bitter-Regular");
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   body {
-    font-family: "montserrat";
+    font-family: ${(props) => props.theme.font.default};
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: ${(props) => props.theme.font.headline}
+  }
+
+  a {
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
   }
 `;
 
