@@ -7,7 +7,7 @@ const Header = () => (
     <Logo />
 
     <S.Nav>
-      <S.NavLink to="/search?q=javascript">Search</S.NavLink>
+      <S.NavLink to="/search/javascript">Search</S.NavLink>
       <S.NavLink to="/#how-it-works">How it works</S.NavLink>
       <S.NavLink to="/#about">About</S.NavLink>
     </S.Nav>
