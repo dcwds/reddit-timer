@@ -6,6 +6,11 @@ const theme = {
     default: `montserrat, ${systemFontStack}`,
     headline: `bitter, ${systemFontStack}`,
   },
+  colors: {
+    link: {
+      nav: ['#636363', '#000000'],
+    },
+  },
 };
 
 export default theme;
