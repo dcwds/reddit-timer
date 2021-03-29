@@ -19,6 +19,10 @@ const GlobalStyle = createGlobalStyle`
          local("Bitter-Regular");
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     font-family: ${(props) => props.theme.font.default};
   }

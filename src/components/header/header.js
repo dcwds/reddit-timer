@@ -15,8 +15,7 @@ const Nav = styled.nav`
 
   a {
     color: ${(props) => props.theme.colors.link.nav[0]};
-    margin-right: 1.063rem; /* ~25px */
-    padding: 0.5rem;
+    margin-right: 1.563rem; /* 25px */
 
     &:hover {
       color: ${(props) => props.theme.colors.link.nav[1]}
