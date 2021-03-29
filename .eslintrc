@@ -13,6 +13,7 @@
     "cypress/no-unnecessary-waiting": "error",
     "cypress/assertion-before-screenshot": "warn",
     "cypress/no-force": "warn",
+    "import/prefer-default-export": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
