@@ -1,18 +1,18 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
-import { fireEvent } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
-import { render } from '../../test-utils';
+import { render, fireEvent } from '../../test-utils';
 import Header from './header';
 
 describe('header', () => {
   let header = null;
-  let history = null;
+  let spyHistoryPush = null;
 
   beforeEach(() => {
-    history = createMemoryHistory();
-    history.push = jest.fn();
-    header = render(<Router history={history}><Header /></Router>);
+    header = render(<Header />);
+    spyHistoryPush = jest.spyOn(header.history, 'push');
+  });
+
+  afterEach(() => {
+    spyHistoryPush.mockRestore();
   });
 
   it('routes how-it-works link', () => {
@@ -20,7 +20,7 @@ describe('header', () => {
 
     fireEvent.click(getByRole('link', { name: /how it works/i }));
 
-    expect(history.push).toHaveBeenCalledWith('/#how-it-works');
+    expect(spyHistoryPush).toHaveBeenCalledWith('/#how-it-works');
   });
 
   it('routes about link', () => {
@@ -28,7 +28,7 @@ describe('header', () => {
 
     fireEvent.click(getByRole('link', { name: /about/i }));
 
-    expect(history.push).toHaveBeenCalledWith('/#about');
+    expect(spyHistoryPush).toHaveBeenCalledWith('/#about');
   });
 
   it('routes search link with \'javascript\' url param', () => {
@@ -36,6 +36,6 @@ describe('header', () => {
 
     fireEvent.click(getByRole('link', { name: /search/i }));
 
-    expect(history.push).toHaveBeenCalledWith('/search/javascript');
+    expect(spyHistoryPush).toHaveBeenCalledWith('/search/javascript');
   });
 });
