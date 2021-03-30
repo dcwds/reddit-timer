@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import productImage from './product.png';
 import * as S from './hero.style';
+import productImage from './product.png';
+import productImage2x from './product-2x.png';
 
 const Hero = () => (
   <S.Hero>
@@ -12,7 +13,11 @@ const Hero = () => (
     <p>/r/javascript</p>
 
     <Link to="/search/javascript">
-      <img src={productImage} alt="product" />
+      <img
+        srcSet={`${productImage}, ${productImage2x} 2x`}
+        src={productImage2x}
+        alt="product"
+      />
     </Link>
   </S.Hero>
 );
