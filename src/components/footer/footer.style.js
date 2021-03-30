@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 export const Footer = styled.footer`
   display: flex;
   align-items: center;
-  height: 6.25rem; /* 100px */
   font-size: 0.875rem;
+  height: 6.25rem; /* 100px */
+  margin: auto;
+  max-width: 61.25rem; /* 980px */
+  padding: 0 1.25rem; /* 20px */
 `;
 
 export const ProfyLink = styled.a`
