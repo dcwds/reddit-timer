@@ -1,9 +1,20 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { breakpoint, mediaQuery } from '../../styles/media-query';
 
 export const Hero = styled.section`
   margin-top: 1.688rem; /* 27px */
   text-align: center;
+`;
+
+export const Headline = styled.h1`
+  margin: 0 0 1.25rem 0; /* 20px */
+`;
+
+export const Description = styled.p`
+  ${mediaQuery(breakpoint.md, css`
+    margin-bottom: 2.813rem; /* 45px */
+  `)}
 `;
 
 export const CTAButton = styled(Link)`
@@ -14,11 +25,23 @@ export const CTAButton = styled(Link)`
   font-weight: 500;
   height: 2.25rem; /* 36px */
   line-height: 2.25rem;
+  margin-bottom: 1.25rem; /* 20px */
   padding: 0 0.938rem; /* 15px */
   border-radius: 4px;
   text-transform: uppercase;
+
+  ${mediaQuery(breakpoint.md, css`
+    margin-bottom: 2.813rem; /* 45px */
+  `)}
 `;
 
 export const DefaultSubreddit = styled.p`
+  font-size: ${(props) => props.theme.font.size.sm};
   font-weight: 500;
+  margin-top: 0;
+
+  ${mediaQuery(breakpoint.md, css`
+      font-size: inherit;
+      margin: 0 0 2.25rem 0; /* 36px */
+  `)}
 `;

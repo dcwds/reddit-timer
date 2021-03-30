@@ -1,4 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
+import { breakpoint, mediaQuery } from '../../styles/media-query';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -45,6 +46,15 @@ const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     color: ${(props) => props.theme.color.headline};
     font-family: ${(props) => props.theme.font.family.headline};
+    line-height: ${(props) => props.theme.font.lineHeight.headline};
+  }
+
+  h1 {
+    font-size: ${(props) => props.theme.font.size.md};
+
+    ${mediaQuery(breakpoint.md, css`
+      font-size: ${(props) => props.theme.font.size.lg};
+    `)}
   }
 
   a {

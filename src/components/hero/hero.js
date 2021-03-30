@@ -6,8 +6,10 @@ import productImage2x from './product-2x.png';
 
 const Hero = () => (
   <S.Hero>
-    <h1>No reaction to your reddit posts?</h1>
-    <p>Great timing, great results! Find the best time to post on your subreddit.</p>
+    <S.Headline>No reaction to your reddit posts?</S.Headline>
+    <S.Description>
+      Great timing, great results! Find the best time to post on your subreddit.
+    </S.Description>
     <S.CTAButton to="/search/javascript">Show me the best time</S.CTAButton>
 
     <S.DefaultSubreddit>/r/javascript</S.DefaultSubreddit>

@@ -13,9 +13,12 @@ const theme = {
     size: {
       default: '1rem', // 16px
       sm: '0.875rem', // 14px
+      md: '1.75rem', // 28px
+      lg: '2.375rem', // 38px
     },
     lineHeight: {
       default: 1.69,
+      headline: 1.35,
     },
   },
   color: {
