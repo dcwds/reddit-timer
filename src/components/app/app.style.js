@@ -7,7 +7,6 @@ export const Wrapper = styled.main`
   ${mediaQuery(breakpoint.xl, css`
       margin: 0 auto;
       max-width: 90rem; /* 1440px */
-      padding: 0 5rem; /* 80px */
   `)}
 `;
 

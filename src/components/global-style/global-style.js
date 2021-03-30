@@ -11,6 +11,15 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
+    font-family: "montserrat";
+    font-weight: 500;
+    font-style: normal;
+    src: url("/fonts/montserrat-medium.woff2") format("woff2"),
+         url("/fonts/montserrat-medium.woff") format("woff"),
+         local("Montserrat-Medium");
+  }
+
+  @font-face {
     font-family: "bitter";
     font-weight: 400;
     font-style: normal;

@@ -10,7 +10,7 @@ const Hero = () => (
     <p>Great timing, great results! Find the best time to post on your subreddit.</p>
     <S.CTAButton to="/search/javascript">Show me the best time</S.CTAButton>
 
-    <p>/r/javascript</p>
+    <S.DefaultSubreddit>/r/javascript</S.DefaultSubreddit>
 
     <Link to="/search/javascript">
       <img
