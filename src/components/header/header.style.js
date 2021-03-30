@@ -1,11 +1,18 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { breakpoint, mediaQuery } from '../../styles/media-query';
 
 export const Wrapper = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: ${(props) => props.theme.size.headerHeight};
+  flex-direction: column;
+  padding: 1.25rem 0; /* 20px */
+
+  ${mediaQuery(breakpoint.md, css`
+    height: ${(props) => props.theme.size.headerHeight};
+    flex-direction: row;
+    justify-content: space-between;
+  `)}
 `;
 
 export const Nav = styled.nav`
