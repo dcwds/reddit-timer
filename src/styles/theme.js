@@ -1,7 +1,10 @@
+import { breakpoint } from './media-query';
+
 const systemFontStack = `system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
 `;
 
 const theme = {
+  breakpoint,
   font: {
     family: {
       default: `montserrat, ${systemFontStack}`,
