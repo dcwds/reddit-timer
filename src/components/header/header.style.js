@@ -5,7 +5,7 @@ export const Wrapper = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 6.25rem; /* 100px */
+  height: ${(props) => props.theme.size.headerHeight};
 `;
 
 export const Nav = styled.nav`
