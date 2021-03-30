@@ -5,3 +5,7 @@ export const Wrapper = styled.main`
   max-width: 90rem; /* 1440px */
   padding: 0 5rem; /* 80px */
 `;
+
+export const Content = styled.article`
+  min-height: ${(props) => `calc(100vh - ${props.theme.size.headerHeight} - ${props.theme.size.footerHeight})`};
+`;

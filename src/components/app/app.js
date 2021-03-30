@@ -5,6 +5,7 @@ import { Normalize } from 'styled-normalize';
 import theme from '../../theme';
 import Header from '../header';
 import Footer from '../footer';
+import Hero from '../hero';
 import GlobalStyle from '../global-style';
 import * as S from './app.style';
 
@@ -16,14 +17,16 @@ const App = () => (
 
       <S.Wrapper>
         <Header />
-        <Switch>
-          <Route exact path="/">
-            Home
-          </Route>
-          <Route path="/search">
-            Search
-          </Route>
-        </Switch>
+        <S.Content>
+          <Switch>
+            <Route exact path="/">
+              <Hero />
+            </Route>
+            <Route path="/search">
+              Search
+            </Route>
+          </Switch>
+        </S.Content>
         <Footer />
       </S.Wrapper>
     </ThemeProvider>
