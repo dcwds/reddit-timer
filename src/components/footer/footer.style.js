@@ -7,10 +7,11 @@ export const Footer = styled.footer`
   align-items: center;
   font-size: ${(props) => props.theme.font.size.sm};
   height: ${(props) => props.theme.size.footerHeight};
+  margin: auto auto 0 auto;
   padding: 0 1.25rem; /* 20px */
+  width: 100%;
 
   ${mediaQuery(breakpoint.lg, css`
-      margin: auto;
       max-width: 61.25rem; /* 980px */
   `)}
 `;

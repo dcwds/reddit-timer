@@ -17,16 +17,14 @@ const App = () => (
 
       <S.Wrapper>
         <Header />
-        <S.Content>
-          <Switch>
-            <Route exact path="/">
-              <Hero />
-            </Route>
-            <Route path="/search">
-              Search
-            </Route>
-          </Switch>
-        </S.Content>
+        <Switch>
+          <Route exact path="/">
+            <Hero />
+          </Route>
+          <Route path="/search">
+            Search
+          </Route>
+        </Switch>
         <Footer />
       </S.Wrapper>
     </ThemeProvider>
