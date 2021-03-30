@@ -13,12 +13,7 @@ export const Nav = styled.nav`
 `;
 
 export const NavLink = styled(Link)`
-  color: ${(props) => props.theme.colors.link.nav[0]};
   margin-right: 1.563rem; /* 25px */
-
-  &:hover {
-    color: ${(props) => props.theme.colors.link.nav[1]}
-  }
 
   &:last-of-type { margin-right: 0; }
 `;
