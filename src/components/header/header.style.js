@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { breakpoint, mediaQuery } from '../../styles/media-query';
 
@@ -19,7 +18,7 @@ export const Nav = styled.nav`
   display: flex;
 `;
 
-export const NavLink = styled(Link)`
+export const NavLinkWrapper = styled.div`
   margin-right: 1.563rem; /* 25px */
 
   &:last-of-type { margin-right: 0; }

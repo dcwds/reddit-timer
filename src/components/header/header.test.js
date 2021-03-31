@@ -4,39 +4,26 @@ import Header from './header';
 import { DEFAULT_SUBREDDIT } from '../../constants';
 
 describe('header', () => {
-  let header = null;
-  let spyHistoryPush = null;
-
-  beforeEach(() => {
-    header = render(<Header />);
-    spyHistoryPush = jest.spyOn(header.history, 'push');
-  });
-
-  afterEach(() => {
-    spyHistoryPush.mockRestore();
-  });
-
   it('routes how-it-works link', () => {
-    const { getByRole } = header;
+    const { getByRole } = render(<Header />);
 
-    fireEvent.click(getByRole('link', { name: /how it works/i }));
-
-    expect(spyHistoryPush).toHaveBeenCalledWith('/#how-it-works');
+    expect(getByRole('link', { name: /how it works/i })).toHaveAttribute('href', '/#how-it-works');
   });
 
   it('routes about link', () => {
-    const { getByRole } = header;
+    const { getByRole } = render(<Header />);
 
-    fireEvent.click(getByRole('link', { name: /about/i }));
-
-    expect(spyHistoryPush).toHaveBeenCalledWith('/#about');
+    expect(getByRole('link', { name: /about/i })).toHaveAttribute('href', '/#about');
   });
 
   it(`routes search link with "${DEFAULT_SUBREDDIT}" url param`, () => {
-    const { getByRole } = header;
+    const { getByRole, history } = render(<Header />);
+    const spyHistoryPush = jest.spyOn(history, 'push');
 
     fireEvent.click(getByRole('link', { name: /search/i }));
 
     expect(spyHistoryPush).toHaveBeenCalledWith(`/search/${DEFAULT_SUBREDDIT}`);
+
+    spyHistoryPush.mockRestore();
   });
 });
