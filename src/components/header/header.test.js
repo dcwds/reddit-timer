@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '../../test-utils';
 import Header from './header';
+import { DEFAULT_SUBREDDIT } from '../../constants';
 
 describe('header', () => {
   let header = null;
@@ -31,11 +32,11 @@ describe('header', () => {
     expect(spyHistoryPush).toHaveBeenCalledWith('/#about');
   });
 
-  it('routes search link with \'javascript\' url param', () => {
+  it(`routes search link with "${DEFAULT_SUBREDDIT}" url param`, () => {
     const { getByRole } = header;
 
     fireEvent.click(getByRole('link', { name: /search/i }));
 
-    expect(spyHistoryPush).toHaveBeenCalledWith('/search/javascript');
+    expect(spyHistoryPush).toHaveBeenCalledWith(`/search/${DEFAULT_SUBREDDIT}`);
   });
 });

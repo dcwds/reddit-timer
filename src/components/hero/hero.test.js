@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from './hero';
 import { render, fireEvent } from '../../test-utils';
+import { DEFAULT_SUBREDDIT } from '../../constants';
 
 describe('hero', () => {
   let hero = null;
@@ -20,7 +21,7 @@ describe('hero', () => {
 
     fireEvent.click(getByRole('link', { name: /show me the best time/i }));
 
-    expect(spyHistoryPush).toHaveBeenCalledWith('/search/javascript');
+    expect(spyHistoryPush).toHaveBeenCalledWith(`/search/${DEFAULT_SUBREDDIT}`);
   });
 
   it('routes product image', () => {
@@ -28,6 +29,6 @@ describe('hero', () => {
 
     fireEvent.click(getByRole('link', { name: /product/i }));
 
-    expect(spyHistoryPush).toHaveBeenCalledWith('/search/javascript');
+    expect(spyHistoryPush).toHaveBeenCalledWith(`/search/${DEFAULT_SUBREDDIT}`);
   });
 });
