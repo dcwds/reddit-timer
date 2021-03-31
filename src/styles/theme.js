@@ -29,7 +29,7 @@ const theme = {
     },
     button: {
       text: '#FFFFFF',
-      background: ['#FDB755'],
+      background: ['#FDB755', '#EEA845'],
     },
   },
   size: {

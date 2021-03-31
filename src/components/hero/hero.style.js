@@ -34,6 +34,11 @@ export const CTAButton = styled(Link)`
   padding: 0 0.938rem; /* 15px */
   border-radius: 4px;
   text-transform: uppercase;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: ${(props) => props.theme.color.button.background[1]};
+  }
 
   ${mediaQuery(breakpoint.md, css`
     margin-bottom: 2.813rem; /* 45px */
