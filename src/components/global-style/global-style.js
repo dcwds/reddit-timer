@@ -61,14 +61,6 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     transition: color 0.2s ease-in-out;
   }
-
-  header a, footer a {
-    color: ${(props) => props.theme.color.link.nav[0]};
-
-    &:hover {
-      color: ${(props) => props.theme.color.link.nav[1]}
-    }
-  }
 `;
 
 export default GlobalStyle;

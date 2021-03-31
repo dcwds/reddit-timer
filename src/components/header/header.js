@@ -5,7 +5,7 @@ import { DEFAULT_SUBREDDIT } from '../../constants';
 import * as S from './header.style';
 
 const Header = () => (
-  <S.Wrapper>
+  <S.Header>
     <Logo />
 
     <S.Nav>
@@ -19,7 +19,7 @@ const Header = () => (
         <a href="/#about">About</a>
       </S.NavLinkWrapper>
     </S.Nav>
-  </S.Wrapper>
+  </S.Header>
 );
 
 export default Header;

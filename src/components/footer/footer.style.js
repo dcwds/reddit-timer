@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { navLinkStyle } from '../../styles/shared';
 import { breakpoint, mediaQuery } from '../../styles/media-query';
 
 export const Footer = styled.footer`
@@ -9,6 +10,8 @@ export const Footer = styled.footer`
   margin: auto auto 0 auto;
   padding: 0 1.25rem; /* 20px */
   width: 100%;
+
+  a { ${navLinkStyle} }
 
   ${mediaQuery(breakpoint.lg, css`
       max-width: 61.25rem; /* 980px */
