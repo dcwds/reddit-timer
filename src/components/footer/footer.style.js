@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
 import { breakpoint, mediaQuery } from '../../styles/media-query';
 
 export const Footer = styled.footer`
@@ -16,11 +15,11 @@ export const Footer = styled.footer`
   `)}
 `;
 
-export const ProfyLink = styled.a`
+export const ProfyLinkWrapper = styled.div`
   flex: 1;
 `;
 
-export const TermsLink = styled(Link)`
+export const TermsLinkWrapper = styled.div`
   flex: 1;
   text-align: right;
 `;
