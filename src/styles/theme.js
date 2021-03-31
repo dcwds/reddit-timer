@@ -11,10 +11,10 @@ const theme = {
       headline: `bitter, ${systemFontStack}`,
     },
     size: {
-      default: '1rem', // 16px
-      sm: '0.875rem', // 14px
-      md: '1.75rem', // 28px
-      lg: '2.375rem', // 38px
+      default: '1em', // 16px
+      sm: '0.875em', // 14px
+      md: '1.5em', // 24px
+      lg: '2.375em', // 38px
     },
     lineHeight: {
       default: 1.69,

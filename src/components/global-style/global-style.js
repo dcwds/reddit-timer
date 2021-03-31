@@ -40,7 +40,12 @@ const GlobalStyle = createGlobalStyle`
   body {
     color: ${(props) => props.theme.color.default};
     font-family: ${(props) => props.theme.font.family.default};
+    font-size: 90%;
     line-height: ${(props) => props.theme.font.lineHeight.default};
+
+    ${mediaQuery(breakpoint.md, css`
+      font-size: 100%;
+    `)}
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -50,11 +55,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    font-size: ${(props) => props.theme.font.size.md};
+    font-size: ${(props) => props.theme.font.size.lg};
+  }
 
-    ${mediaQuery(breakpoint.md, css`
-      font-size: ${(props) => props.theme.font.size.lg};
-    `)}
+  h2 {
+    font-size: ${(props) => props.theme.font.size.md};
   }
 
   a {
