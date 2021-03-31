@@ -25,6 +25,7 @@ const theme = {
     default: '#93918F',
     headline: '#000000',
     link: {
+      default: ['#0087FF', '#1360A4'],
       nav: ['#636363', '#000000'],
     },
     button: {
