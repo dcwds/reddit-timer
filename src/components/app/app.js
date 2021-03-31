@@ -6,6 +6,7 @@ import theme from '../../styles/theme';
 import Header from '../header';
 import Footer from '../footer';
 import Hero from '../hero';
+import Info from '../info';
 import GlobalStyle from '../global-style';
 import * as S from './app.style';
 
@@ -20,6 +21,7 @@ const App = () => (
         <Switch>
           <Route exact path="/">
             <Hero />
+            <Info />
           </Route>
           <Route path="/search">
             Search

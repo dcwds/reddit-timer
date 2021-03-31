@@ -4,7 +4,12 @@ import { breakpoint, mediaQuery } from '../../styles/media-query';
 
 export const Hero = styled.section`
   margin-top: 1.688rem; /* 27px */
+  margin-bottom: 1.25rem; /* 20px */
   text-align: center;
+
+  ${mediaQuery(breakpoint.md, css`
+    margin-bottom: 7.5rem; /* 120px */
+  `)}
 `;
 
 export const Headline = styled.h1`
