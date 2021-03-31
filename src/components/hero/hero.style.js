@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { breakpoint, mediaQuery } from '../../styles/media-query';
 
-export const Hero = styled.section`
+export const Hero = styled.article`
   margin-top: 1.688rem; /* 27px */
   margin-bottom: 1.25rem; /* 20px */
   text-align: center;

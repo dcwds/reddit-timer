@@ -9,7 +9,7 @@ export const InfoWrapper = styled.div`
   `)}
 `;
 
-export const Block = styled.section`
+export const Block = styled.article`
   margin-bottom: 2.5rem; /* 40px */
 
   ${mediaQuery(breakpoint.md, css`
