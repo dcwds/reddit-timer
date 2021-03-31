@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import theme from './theme';
+import theme from './styles/theme';
 
 const renderWithWrapper = (
   ui,
