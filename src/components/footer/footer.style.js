@@ -10,6 +10,15 @@ export const Footer = styled.footer`
   padding: 0 1.25rem; /* 20px */
   width: 100%;
 
+  a {
+    color: ${(props) => props.theme.color.link.nav.normal};
+
+    &:hover {
+      color: ${(props) => props.theme.color.link.nav.hover};
+    }
+  }
+
+
   ${mediaQuery(breakpoint.lg, css`
       max-width: 61.25rem; /* 980px */
   `)}

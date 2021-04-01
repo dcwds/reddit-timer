@@ -11,10 +11,10 @@ const theme = {
       headline: `bitter, ${systemFontStack}`,
     },
     size: {
-      default: '1rem', // 16px
-      sm: '0.875rem', // 14px
-      md: '1.75rem', // 28px
-      lg: '2.375rem', // 38px
+      default: '1em', // 16px
+      sm: '0.875em', // 14px
+      md: '1.5em', // 24px
+      lg: '2.375em', // 38px
     },
     lineHeight: {
       default: 1.69,
@@ -25,11 +25,21 @@ const theme = {
     default: '#93918F',
     headline: '#000000',
     link: {
-      nav: ['#636363', '#000000'],
+      default: {
+        normal: '#0087FF',
+        hover: '#1360A4',
+      },
+      nav: {
+        normal: '#636363',
+        hover: '#000000',
+      },
     },
     button: {
       text: '#FFFFFF',
-      background: ['#FDB755'],
+      background: {
+        normal: '#FDB755',
+        hover: '#EEA845',
+      },
     },
   },
   size: {
