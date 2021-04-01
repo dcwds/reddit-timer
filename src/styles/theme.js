@@ -25,12 +25,21 @@ const theme = {
     default: '#93918F',
     headline: '#000000',
     link: {
-      default: ['#0087FF', '#1360A4'],
-      nav: ['#636363', '#000000'],
+      default: {
+        normal: '#0087FF',
+        hover: '#1360A4',
+      },
+      nav: {
+        normal: '#636363',
+        hover: '#000000',
+      },
     },
     button: {
       text: '#FFFFFF',
-      background: ['#FDB755', '#EEA845'],
+      background: {
+        normal: '#FDB755',
+        hover: '#EEA845',
+      },
     },
   },
   size: {

@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { navLinkStyle } from '../../styles/shared';
 import { breakpoint, mediaQuery } from '../../styles/media-query';
 
 export const Footer = styled.footer`
@@ -11,7 +10,14 @@ export const Footer = styled.footer`
   padding: 0 1.25rem; /* 20px */
   width: 100%;
 
-  a { ${navLinkStyle} }
+  a {
+    color: ${(props) => props.theme.color.link.nav.normal};
+
+    &:hover {
+      color: ${(props) => props.theme.color.link.nav.hover};
+    }
+  }
+
 
   ${mediaQuery(breakpoint.lg, css`
       max-width: 61.25rem; /* 980px */

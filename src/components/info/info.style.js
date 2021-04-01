@@ -40,9 +40,9 @@ export const Item = styled.li`
 `;
 
 export const Link = styled.a`
-  color: ${(props) => props.theme.color.link.default[0]};
+  color: ${(props) => props.theme.color.link.default.normal};
 
   &:hover {
-    color: ${(props) => props.theme.color.link.default[1]};
+    color: ${(props) => props.theme.color.link.default.hover};
   }
 `;

@@ -25,7 +25,7 @@ export const Description = styled.p`
 export const CTAButton = styled(Link)`
   display: inline-block;
   color: ${(props) => props.theme.color.button.text};
-  background-color: ${(props) => props.theme.color.button.background[0]};
+  background-color: ${(props) => props.theme.color.button.background.normal};
   font-size: ${(props) => props.theme.font.size.sm};
   font-weight: 500;
   height: 2.25rem; /* 36px */
@@ -37,7 +37,7 @@ export const CTAButton = styled(Link)`
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: ${(props) => props.theme.color.button.background[1]};
+    background-color: ${(props) => props.theme.color.button.background.hover};
   }
 
   ${mediaQuery(breakpoint.md, css`
