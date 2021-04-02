@@ -5,12 +5,12 @@ import * as S from './search.style';
 
 const Search = () => {
   const history = useHistory();
-  const { subreddit } = useParams();
+  const { subreddit: initialSubreddit } = useParams();
   const {
-    form,
+    subreddit,
     changeSubreddit,
     searchSubreddit,
-  } = useSearchForm(subreddit, history);
+  } = useSearchForm(initialSubreddit, history);
 
   return (
     <S.Search>
@@ -22,7 +22,7 @@ const Search = () => {
           <S.Input
             type="text"
             id="subreddit-input"
-            value={form.value}
+            value={subreddit}
             onChange={changeSubreddit}
             onKeyDown={searchSubreddit}
           />

@@ -20,10 +20,7 @@ describe('useSearchForm', () => {
   it('sets initial state', () => {
     const { result } = hook;
 
-    expect(result.current.form).toEqual({
-      isSubmitting: false,
-      value: DEFAULT_SUBREDDIT,
-    });
+    expect(result.current.subreddit).toBe(DEFAULT_SUBREDDIT);
   });
 
   it('updates value using changeSubreddit handler', () => {
@@ -33,7 +30,7 @@ describe('useSearchForm', () => {
       result.current.changeSubreddit({ target: { value: 'test' } });
     });
 
-    expect(result.current.form.value).toBe('test');
+    expect(result.current.subreddit).toBe('test');
   });
 
   it('updates url when using searchSubreddit handler via click event', () => {
@@ -45,7 +42,7 @@ describe('useSearchForm', () => {
 
     act(() => { result.current.searchSubreddit({ type: 'click' }); });
 
-    expect(history.location.pathname).toBe('test');
+    expect(history.location.pathname).toBe('/search/test');
   });
 
   it('updates url when using searchSubreddit handler via \'Enter\' key', () => {
@@ -57,6 +54,6 @@ describe('useSearchForm', () => {
 
     act(() => { result.current.searchSubreddit({ key: 'Enter' }); });
 
-    expect(history.location.pathname).toBe('test');
+    expect(history.location.pathname).toBe('/search/test');
   });
 });
