@@ -8,7 +8,7 @@ import theme from '../../styles/theme';
 import Header from '../header';
 import Footer from '../footer';
 import HomePage from '../page-home';
-import Search from '../search';
+import SearchPage from '../page-search';
 import GlobalStyle from '../global-style';
 import * as S from './app.style';
 import { DEFAULT_SUBREDDIT } from '../../constants';
@@ -26,7 +26,7 @@ const App = () => (
             <HomePage />
           </Route>
           <Route path="/search/:subreddit">
-            <Search />
+            <SearchPage />
           </Route>
           <Redirect from="/search" to={`/search/${DEFAULT_SUBREDDIT}`} />
         </Switch>

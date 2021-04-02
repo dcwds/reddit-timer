@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useSearchForm = (initialSubreddit, history) => {
+const useSubredditForm = (initialSubreddit, history) => {
   const [subreddit, setSubreddit] = useState(initialSubreddit);
 
   const changeSubreddit = (e) => setSubreddit(e.target.value);
@@ -21,4 +21,4 @@ const useSearchForm = (initialSubreddit, history) => {
   return { subreddit, changeSubreddit, searchSubreddit };
 };
 
-export default useSearchForm;
+export default useSubredditForm;

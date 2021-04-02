@@ -1,15 +1,15 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import { createMemoryHistory } from 'history';
-import useSearchForm from './use-search-form';
+import useSubredditForm from './use-subreddit-form';
 import { DEFAULT_SUBREDDIT } from '../../constants';
 
-describe('useSearchForm', () => {
+describe('useSubredditForm', () => {
   let hook = null;
   let history = null;
 
   beforeEach(() => {
     history = createMemoryHistory();
-    hook = renderHook(() => useSearchForm(DEFAULT_SUBREDDIT, history));
+    hook = renderHook(() => useSubredditForm(DEFAULT_SUBREDDIT, history));
   });
 
   afterEach(() => {

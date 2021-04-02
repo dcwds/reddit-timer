@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 
-export const Search = styled.article`
-  margin-top: 1.688rem; /* 27px */
-  text-align: center;
-`;
-
-export const Headline = styled.h1`
-  margin-top: 0
-`;
-
 export const FormWrapper = styled.div`
   display: flex;
   height: 2.25rem; /* 36px */
