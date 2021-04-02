@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import useSearchForm from '../../hooks/use-search-form';
+import * as S from './search.style';
 
 const Search = () => {
   const history = useHistory();
@@ -12,29 +13,29 @@ const Search = () => {
   } = useSearchForm(subreddit, history);
 
   return (
-    <article>
-      <h1>Find the best time for a subreddit</h1>
+    <S.Search>
+      <S.Headline>Find the best time for a subreddit</S.Headline>
 
-      <div>
-        <label htmlFor="subreddit-input">
-          r/
-          <input
+      <S.FormWrapper>
+        <S.Label htmlFor="subreddit-input">
+          <S.LabelText>r/</S.LabelText>
+          <S.Input
             type="text"
             id="subreddit-input"
             defaultValue={form.subreddit}
             onChange={changeSubreddit}
             onKeyDown={searchSubreddit}
           />
-        </label>
+        </S.Label>
 
-        <button
+        <S.Button
           type="button"
           onClick={searchSubreddit}
         >
           Search
-        </button>
-      </div>
-    </article>
+        </S.Button>
+      </S.FormWrapper>
+    </S.Search>
   );
 };
 
