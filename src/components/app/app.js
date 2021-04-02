@@ -7,8 +7,7 @@ import { Normalize } from 'styled-normalize';
 import theme from '../../styles/theme';
 import Header from '../header';
 import Footer from '../footer';
-import Hero from '../hero';
-import Info from '../info';
+import HomePage from '../page-home';
 import Search from '../search';
 import GlobalStyle from '../global-style';
 import * as S from './app.style';
@@ -24,8 +23,7 @@ const App = () => (
         <Header />
         <Switch>
           <Route exact path="/">
-            <Hero />
-            <Info />
+            <HomePage />
           </Route>
           <Route path="/search/:subreddit">
             <Search />
