@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 
 const useSearchForm = (subreddit, history) => {
   const [form, setForm] = useState({
-    subreddit,
     isSubmitting: false,
-    value: '',
+    value: subreddit,
   });
 
   const changeSubreddit = (e) => setForm((s) => ({
@@ -17,19 +16,26 @@ const useSearchForm = (subreddit, history) => {
     if (e.key === 'Enter' || e.type === 'click') {
       setForm((s) => ({
         ...s,
-        subreddit: form.value,
         isSubmitting: true,
       }));
     }
   };
 
   useEffect(() => {
+    // Handles case where `search` link in header is clicked
+    // which updates the search input value.
+
+    // Right now, this gets called twice on `subreddit` param change.
+    setForm((s) => ({ ...s, value: subreddit }));
+  }, [subreddit]);
+
+  useEffect(() => {
     if (form.isSubmitting) {
-      history.push(form.subreddit);
+      history.push(form.value);
 
       setForm((s) => ({ ...s, isSubmitting: false }));
     }
-  }, [form.isSubmitting, form.subreddit, history]);
+  }, [form.isSubmitting, form.value, history]);
 
   return { form, changeSubreddit, searchSubreddit };
 };

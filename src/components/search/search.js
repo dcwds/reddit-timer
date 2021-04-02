@@ -22,7 +22,7 @@ const Search = () => {
           <S.Input
             type="text"
             id="subreddit-input"
-            defaultValue={form.subreddit}
+            value={form.value}
             onChange={changeSubreddit}
             onKeyDown={searchSubreddit}
           />
