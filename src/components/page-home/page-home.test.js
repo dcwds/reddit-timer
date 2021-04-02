@@ -4,28 +4,22 @@ import { fireEvent, render, screen } from '../../test-utils';
 import * as C from '../../constants';
 
 describe('page: home', () => {
-  let home = null;
-  let spyHistoryPush = null;
+  let page = null;
 
   beforeEach(() => {
-    home = render(<HomePage />);
-    spyHistoryPush = jest.spyOn(home.history, 'push');
-  });
-
-  afterEach(() => {
-    spyHistoryPush.mockRestore();
+    page = render(<HomePage />);
   });
 
   it('routes CTA button', () => {
     fireEvent.click(screen.getByRole('link', { name: /show me the best time/i }));
 
-    expect(spyHistoryPush).toHaveBeenCalledWith(`/search/${C.DEFAULT_SUBREDDIT}`);
+    expect(page.history.location.pathname).toBe(`/search/${C.DEFAULT_SUBREDDIT}`);
   });
 
   it('routes heatmap image', () => {
     fireEvent.click(screen.getByRole('link', { name: /heatmap/i }));
 
-    expect(spyHistoryPush).toHaveBeenCalledWith(`/search/${C.DEFAULT_SUBREDDIT}`);
+    expect(page.history.location.pathname).toBe(`/search/${C.DEFAULT_SUBREDDIT}`);
   });
 
   it('routes profy link', () => {

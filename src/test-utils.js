@@ -7,7 +7,10 @@ import theme from './styles/theme';
 
 const renderWithWrapper = (
   ui,
-  { history = createMemoryHistory() } = {},
+  {
+    route = '/',
+    history = createMemoryHistory({ initialEntries: [route] }),
+  } = {},
 ) => (
   {
     ...render(
