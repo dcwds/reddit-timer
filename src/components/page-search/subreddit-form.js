@@ -1,16 +1,13 @@
 import React from 'react';
-import { useParams, useHistory } from 'react-router-dom';
 import useSubredditForm from '../../hooks/use-subreddit-form';
 import * as S from './subreddit-form.style';
 
 const SubredditForm = () => {
-  const history = useHistory();
-  const { subreddit: initialSubreddit } = useParams();
   const {
     subreddit,
     changeSubreddit,
     searchSubreddit,
-  } = useSubredditForm(initialSubreddit, history);
+  } = useSubredditForm();
 
   return (
     <S.FormWrapper>

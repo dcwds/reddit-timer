@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 
-const useSubredditForm = (initialSubreddit, history) => {
+const useSubredditForm = () => {
+  const history = useHistory();
+  const { subreddit: initialSubreddit } = useParams();
+
   const [subreddit, setSubreddit] = useState(initialSubreddit);
 
   const changeSubreddit = (e) => setSubreddit(e.target.value);
