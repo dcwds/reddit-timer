@@ -1,9 +1,9 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React, { Fragment } from 'react';
 import userEvent from '@testing-library/user-event';
+import { Route } from 'react-router-dom';
+import { render, screen, within } from '../../test-utils';
 import Header from '../header';
 import SearchPage from './page-search';
-import { render, screen, within } from '../../test-utils';
 import { DEFAULT_SUBREDDIT } from '../../constants';
 
 describe('page: search', () => {
@@ -13,10 +13,12 @@ describe('page: search', () => {
     // A `Route` with params needs to be included, otherwise
     // `useParams` hook within component returns `undefined`.
     page = render(
-      <Route path="/search/:subreddit">
+      <>
         <Header />
-        <SearchPage />
-      </Route>,
+        <Route path="/search/:subreddit">
+          <SearchPage />
+        </Route>
+      </>,
       { route: '/search/reactjs' },
     );
   });
@@ -45,7 +47,7 @@ describe('page: search', () => {
     expect(page.history.location.pathname).toBe('/search/vuejs');
   });
 
-  it('updates subreddit input value when header search link is clicked', () => {
+  it('updates subreddit input value when header search link is clicked', async () => {
     const input = screen.getByRole('textbox');
     const header = screen.getByRole('banner');
     const searchLink = within(header).getByRole('link', { name: /search/i });
@@ -53,7 +55,7 @@ describe('page: search', () => {
     expect(input.value).toBe('reactjs');
 
     userEvent.click(searchLink);
-    expect(page.history.location.pathname).toBe(`/search/${DEFAULT_SUBREDDIT}`);
+
     expect(input.value).toBe(DEFAULT_SUBREDDIT);
   });
 });
