@@ -30,11 +30,3 @@ export const Item = styled.li`
     margin-right: 0.313rem; /* 5px */
   }
 `;
-
-export const Link = styled.a`
-  color: ${(props) => props.theme.color.link.default.normal};
-
-  &:hover {
-    color: ${(props) => props.theme.color.link.default.hover};
-  }
-`;
