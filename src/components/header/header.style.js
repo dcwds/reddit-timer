@@ -6,6 +6,7 @@ export const Header = styled.header`
   align-items: center;
   flex-direction: column;
   padding: 1.25rem 0; /* 20px */
+  margin-bottom: 1.688rem; /* 27px */
 
   a {
     color: ${(props) => props.theme.color.link.nav.normal};

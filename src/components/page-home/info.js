@@ -1,8 +1,9 @@
 import React from 'react';
 import * as S from './info.style';
+import Container from '../common/container';
 
 const Info = () => (
-  <S.InfoWrapper>
+  <Container>
     <S.Block id="how-it-works">
       <S.Heading>How it works</S.Heading>
       <S.List>
@@ -17,16 +18,16 @@ const Info = () => (
       <p>
         This app was created during a course on
         {' '}
-        <S.Link href="https://profy.dev">profy.dev</S.Link>
+        <a href="https://profy.dev">profy.dev</a>
         {' '}
         with the goal to implement a pixel-perfect real-world application with
         professional workflows and tools like Kanban, Asana, Zeplin, GitHub,
         pull requests and code reviews.
         {' '}
-        <S.Link href="https://profy.dev/employers">Click here for more information.</S.Link>
+        <a href="https://profy.dev/employers">Click here for more information.</a>
       </p>
     </S.Block>
-  </S.InfoWrapper>
+  </Container>
 );
 
 export default Info;

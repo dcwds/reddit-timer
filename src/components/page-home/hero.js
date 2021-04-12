@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { DEFAULT_SUBREDDIT } from '../../constants';
 import * as S from './hero.style';
-import productImage from './product.png';
-import productImage2x from './product-2x.png';
+import heatmapImage from './heatmap.png';
+import heatmapImage2x from './heatmap-2x.png';
 
 const Hero = () => (
   <S.Hero>
@@ -11,7 +11,7 @@ const Hero = () => (
     <S.Description>
       Great timing, great results! Find the best time to post on your subreddit.
     </S.Description>
-    <S.CTAButton to={`/search/${DEFAULT_SUBREDDIT}`}>Show me the best time</S.CTAButton>
+    <S.CTAButton as={Link} to={`/search/${DEFAULT_SUBREDDIT}`}>Show me the best time</S.CTAButton>
 
     <S.DefaultSubreddit>
       /r/
@@ -20,9 +20,9 @@ const Hero = () => (
 
     <Link to={`/search/${DEFAULT_SUBREDDIT}`}>
       <img
-        srcSet={`${productImage}, ${productImage2x} 2x`}
-        src={productImage2x}
-        alt="product"
+        srcSet={`${heatmapImage}, ${heatmapImage2x} 2x`}
+        src={heatmapImage2x}
+        alt="heatmap"
       />
     </Link>
   </S.Hero>

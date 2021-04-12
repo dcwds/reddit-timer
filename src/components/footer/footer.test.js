@@ -1,23 +1,22 @@
 import React from 'react';
-import { render, fireEvent } from '../../test-utils';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '../../test-utils';
 import Footer from './footer';
 import { PROFY_EMPLOYERS_LINK } from '../../constants';
 
 describe('footer', () => {
-  it('routes profy employers link', () => {
-    const { getByRole } = render(<Footer />);
+  let footer = null;
 
-    expect(getByRole('link', { name: /profy.dev/i })).toHaveAttribute('href', PROFY_EMPLOYERS_LINK);
+  beforeEach(() => {
+    footer = render(<Footer />);
+  });
+  it('routes profy employers link', () => {
+    expect(screen.getByRole('link', { name: /profy.dev/i })).toHaveAttribute('href', PROFY_EMPLOYERS_LINK);
   });
 
   it('routes terms link', () => {
-    const { getByRole, history } = render(<Footer />);
-    const spyHistoryPush = jest.spyOn(history, 'push');
+    userEvent.click(screen.getByRole('link', { name: /terms & privacy/i }));
 
-    fireEvent.click(getByRole('link', { name: /terms & privacy/i }));
-
-    expect(spyHistoryPush).toHaveBeenCalledWith('/terms');
-
-    spyHistoryPush.mockRestore();
+    expect(footer.history.location.pathname).toBe('/terms');
   });
 });

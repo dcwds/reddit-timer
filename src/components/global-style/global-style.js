@@ -33,6 +33,16 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  a {
+    color: ${(props) => props.theme.color.link.default.normal};
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: ${(props) => props.theme.color.link.default.hover};
+    }
+  }
+
   img {
     max-width: 100%;
   }
@@ -60,11 +70,6 @@ const GlobalStyle = createGlobalStyle`
 
   h2 {
     font-size: ${(props) => props.theme.font.size.md};
-  }
-
-  a {
-    text-decoration: none;
-    transition: color 0.2s ease-in-out;
   }
 `;
 
