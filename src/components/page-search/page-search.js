@@ -1,12 +1,13 @@
 import React from 'react';
 import SubredditForm from './subreddit-form';
 import * as S from './page-search.style';
+import Container from '../common/container';
 
 const SearchPage = () => (
-  <S.Container>
+  <Container>
     <S.Headline>Find the best time for a subreddit</S.Headline>
     <SubredditForm />
-  </S.Container>
+  </Container>
 );
 
 export default SearchPage;

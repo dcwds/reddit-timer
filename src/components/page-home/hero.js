@@ -11,7 +11,7 @@ const Hero = () => (
     <S.Description>
       Great timing, great results! Find the best time to post on your subreddit.
     </S.Description>
-    <S.CTAButton to={`/search/${DEFAULT_SUBREDDIT}`}>Show me the best time</S.CTAButton>
+    <S.CTAButton as={Link} to={`/search/${DEFAULT_SUBREDDIT}`}>Show me the best time</S.CTAButton>
 
     <S.DefaultSubreddit>
       /r/

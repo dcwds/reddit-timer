@@ -1,9 +1,8 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
+import Button from '../common/button';
 import { breakpoint, mediaQuery } from '../../styles/media-query';
 
 export const Hero = styled.article`
-  margin-top: 1.688rem; /* 27px */
   margin-bottom: 1.25rem; /* 20px */
   text-align: center;
 
@@ -22,23 +21,8 @@ export const Description = styled.p`
   `)}
 `;
 
-export const CTAButton = styled(Link)`
-  display: inline-block;
-  color: ${(props) => props.theme.color.button.text};
-  background-color: ${(props) => props.theme.color.button.background.normal};
-  font-size: ${(props) => props.theme.font.size.sm};
-  font-weight: 500;
-  height: 2.25rem; /* 36px */
-  line-height: 2.25rem;
+export const CTAButton = styled(Button)`
   margin-bottom: 1.25rem; /* 20px */
-  padding: 0 0.938rem; /* 15px */
-  border-radius: 4px;
-  text-transform: uppercase;
-  transition: background-color 0.2s ease-in-out;
-
-  &:hover {
-    background-color: ${(props) => props.theme.color.button.background.hover};
-  }
 
   ${mediaQuery(breakpoint.md, css`
     margin-bottom: 2.813rem; /* 45px */

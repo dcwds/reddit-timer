@@ -1,8 +1,9 @@
 import React from 'react';
 import * as S from './info.style';
+import Container from '../common/container';
 
 const Info = () => (
-  <S.InfoWrapper>
+  <Container>
     <S.Block id="how-it-works">
       <S.Heading>How it works</S.Heading>
       <S.List>
@@ -26,7 +27,7 @@ const Info = () => (
         <S.Link href="https://profy.dev/employers">Click here for more information.</S.Link>
       </p>
     </S.Block>
-  </S.InfoWrapper>
+  </Container>
 );
 
 export default Info;

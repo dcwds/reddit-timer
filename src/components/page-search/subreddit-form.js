@@ -1,6 +1,7 @@
 import React from 'react';
 import useSubredditForm from '../../hooks/use-subreddit-form';
 import * as S from './subreddit-form.style';
+import Button from '../common/button';
 
 const SubredditForm = () => {
   const {
@@ -22,12 +23,12 @@ const SubredditForm = () => {
         />
       </S.Label>
 
-      <S.Button
+      <Button
         type="button"
         onClick={searchSubreddit}
       >
         Search
-      </S.Button>
+      </Button>
     </S.FormWrapper>
   );
 };

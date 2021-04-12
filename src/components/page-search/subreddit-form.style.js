@@ -28,20 +28,3 @@ export const Input = styled.input`
   margin: 0 0.625rem; /* 10px */
   padding: 0 0.938rem; /* 15px */
 `;
-
-export const Button = styled.button`
-  background-color: ${(props) => props.theme.color.button.background.normal};
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  color: ${(props) => props.theme.color.button.text};
-  font-size: ${(props) => props.theme.font.size.sm};
-  font-weight: 500;
-  padding: 0 0.938rem; /* 15px */
-  text-transform: uppercase;
-  transition: background-color 0.2s ease-in-out;
-
-  &:hover {
-    background-color: ${(props) => props.theme.color.button.background.hover};
-  }
-`;
