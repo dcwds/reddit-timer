@@ -27,26 +27,27 @@ export const fetchPosts = async (
 
 const useFetchPosts = () => {
   const { subreddit } = useParams();
-  const [posts, setPosts] = useState({
-    error: false,
-    loading: true,
-    results: [],
-  });
+  const [posts, setPosts] = useState([]);
+  const [status, setStatus] = useState('idle');
 
   useEffect(() => {
+    setStatus('loading');
+
     const getPosts = async (subr) => {
       try {
         const fetchedPosts = await fetchPosts(subr, 500);
-        setPosts((s) => ({ ...s, loading: false, results: fetchedPosts }));
+
+        setPosts(fetchedPosts);
+        setStatus('resolved');
       } catch (err) {
-        setPosts((s) => ({ ...s, error: true, loading: false }));
+        setStatus('error');
       }
     };
 
     getPosts(subreddit);
   }, [subreddit]);
 
-  return posts;
+  return { posts, status };
 };
 
 export default useFetchPosts;

@@ -5,14 +5,14 @@ import * as S from './page-search.style';
 import Container from '../common/container';
 
 const SearchPage = () => {
-  const posts = useFetchPosts();
+  const { status } = useFetchPosts();
 
   return (
     <Container>
       <S.Headline>Find the best time for a subreddit</S.Headline>
       <SubredditForm />
 
-      {posts.loading && 'Loading...'}
+      { status === 'loading' && <S.Spinner /> }
     </Container>
   );
 };
