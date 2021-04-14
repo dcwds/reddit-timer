@@ -12,7 +12,18 @@ const SearchPage = () => {
       <S.Headline>Find the best time for a subreddit</S.Headline>
       <SubredditForm />
 
-      { status === 'loading' && <S.Spinner /> }
+      {
+       {
+         loading: <S.Spinner />,
+         error: (
+           <S.Error>
+             We could not get the posts from Reddit.
+             {' '}
+             <a rel="noopener noreferrer" href="https://www.redditstatus.com">Is Reddit down?</a>
+           </S.Error>
+         ),
+       }[status]
+      }
     </Container>
   );
 };

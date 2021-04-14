@@ -1,12 +1,15 @@
 import React, { Fragment } from 'react';
 import userEvent from '@testing-library/user-event';
 import { Route } from 'react-router-dom';
-import { render, screen, within } from '../../test-utils';
+import {
+  render, screen, within, waitForElementToBeRemoved,
+} from '../../test-utils';
 import Header from '../header';
 import SearchPage from './page-search';
 import { DEFAULT_SUBREDDIT } from '../../constants';
 
 describe('page: search', () => {
+  const mockResponse = { data: { children: [] } };
   let page = null;
 
   beforeEach(() => {
@@ -57,5 +60,23 @@ describe('page: search', () => {
     userEvent.click(searchLink);
 
     expect(input.value).toBe(DEFAULT_SUBREDDIT);
+  });
+
+  // Presently, this test issues a warning about wrapping certain calls with `act`.
+  // I tried using this strategy: https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning
+  // Need to fix.
+  it('loads posts after subreddit submission', async () => {
+    fetch.mockOnce(JSON.stringify(mockResponse));
+    const input = screen.getByRole('textbox');
+
+    userEvent.clear(input);
+    userEvent.type(input, 'vuejs');
+    userEvent.type(input, '{enter}');
+
+    expect(fetch).toHaveBeenCalledWith('https://www.reddit.com/r/vuejs/top.json?t=year&limit=100&after=null');
+    await waitForElementToBeRemoved(screen.getByLabelText(/loading/i));
+
+    // use `queryBy` to avoid an error being thrown with `getBy` due to element not existing.
+    expect(screen.queryByLabelText(/error/i)).not.toBeInTheDocument();
   });
 });
