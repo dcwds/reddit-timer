@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import fetch from 'node-fetch';
 
 export const fetchPosts = async (
   subreddit,
-  postAmount,
+  postAmount = 500,
   lastPostId,
   fetchedPosts,
 ) => {
-  const amount = typeof (postAmount) === 'undefined' ? 500 : postAmount;
   let postId = typeof (lastPostId) === 'undefined' ? null : lastPostId;
   let posts = typeof (fetchedPosts) === 'undefined' ? [] : fetchedPosts;
   let noMorePosts = false;
 
-  const response = await fetch(`https://reddit.com/r/${subreddit}/top.json?t=year&limit=100&after=${postId}`);
+  const response = await fetch(`https://www.reddit.com/r/${subreddit}/top.json?t=year&limit=100&after=${postId}`);
 
   if (!response.ok) return posts;
 
@@ -23,8 +21,8 @@ export const fetchPosts = async (
   posts = posts.concat(children);
   noMorePosts = children.length < 100; // based on `limit` parameter in url
 
-  if (posts.length >= amount || noMorePosts) return posts.slice(0, amount);
-  return fetchPosts(subreddit, amount, postId, posts);
+  if (posts.length >= postAmount || noMorePosts) return posts.slice(0, postAmount);
+  return fetchPosts(subreddit, postAmount, postId, posts);
 };
 
 const useFetchPosts = () => {

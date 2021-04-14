@@ -3,3 +3,8 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
+
+// https://jestjs.io/docs/configuration#resetmocks-boolean
+beforeEach(() => {
+  jest.resetAllMocks();
+});
