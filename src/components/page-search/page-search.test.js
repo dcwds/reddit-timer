@@ -73,7 +73,7 @@ describe('page: search', () => {
     userEvent.type(input, 'vuejs');
     userEvent.type(input, '{enter}');
 
-    expect(fetch).toHaveBeenCalledWith('https://www.reddit.com/r/vuejs/top.json?t=year&limit=100&after=null');
+    expect(fetch).toHaveBeenCalledWith('https://www.reddit.com/r/vuejs/top.json?t=year&limit=100');
     await waitForElementToBeRemoved(screen.getByLabelText(/loading/i));
 
     // use `queryBy` to avoid an error being thrown with `getBy` due to element not existing.

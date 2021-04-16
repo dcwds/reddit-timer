@@ -7,7 +7,7 @@ export const fetchPosts = async (
   lastPostId = null,
   fetchedPosts = [],
 ) => {
-  const response = await fetch(`https://www.reddit.com/r/${subreddit}/top.json?t=year&limit=100&after=${lastPostId}`);
+  const response = await fetch(`https://www.reddit.com/r/${subreddit}/top.json?t=year&limit=100${lastPostId ? `&after=${lastPostId}` : ''}`);
 
   if (!response.ok) return fetchedPosts;
 
