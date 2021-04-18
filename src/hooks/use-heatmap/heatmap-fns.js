@@ -8,7 +8,7 @@ export const updateWeekdayHours = (hours, hour) => {
   if (foundHour) {
     const { hour: hr, count } = foundHour;
 
-    return [...hours.filter((h) => h.hour !== hr), { hr, count: count + 1 }];
+    return [...hours.filter((h) => h.hour !== hr), { hour: hr, count: count + 1 }];
   }
 
   return [...hours, { hour, count: 1 }];
