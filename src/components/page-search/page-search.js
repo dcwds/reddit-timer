@@ -3,9 +3,10 @@ import SubredditForm from './subreddit-form';
 import useFetchPosts from '../../hooks/use-fetch-posts';
 import * as S from './page-search.style';
 import Container from '../common/container';
+import Heatmap from './heatmap';
 
 const SearchPage = () => {
-  const { status } = useFetchPosts();
+  const { posts, status } = useFetchPosts();
 
   return (
     <Container>
@@ -22,6 +23,7 @@ const SearchPage = () => {
              <a rel="noopener noreferrer" href="https://www.redditstatus.com">Is Reddit down?</a>
            </S.Error>
          ),
+         resolved: <Heatmap posts={posts} />,
        }[status]
       }
     </Container>
