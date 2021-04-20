@@ -2,14 +2,13 @@ import React from 'react';
 import SubredditForm from './subreddit-form';
 import useFetchPosts from '../../hooks/use-fetch-posts';
 import * as S from './page-search.style';
-import Container from '../common/container';
 import Heatmap from './heatmap';
 
 const SearchPage = () => {
   const { posts, status } = useFetchPosts();
 
   return (
-    <Container>
+    <S.Container>
       <S.Headline>Find the best time for a subreddit</S.Headline>
       <SubredditForm />
 
@@ -26,7 +25,7 @@ const SearchPage = () => {
          resolved: <Heatmap posts={posts} />,
        }[status]
       }
-    </Container>
+    </S.Container>
   );
 };
 
