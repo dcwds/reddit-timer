@@ -80,3 +80,8 @@ export const Heatmap = styled.div`
   font-weight: 500;
   font-size: ${(props) => props.theme.font.size.sm};
 `;
+
+export const TimezoneText = styled.p`
+  font-size: ${(props) => props.theme.font.size.sm};
+  text-align: center;
+`;

@@ -1,6 +1,5 @@
 export const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 export const weekdayMap = weekdays.reduce((map, curr) => ({ ...map, [curr]: [] }), {});
-export const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 export const updateWeekdayHours = (hours, post) => {
   const { hour, id } = post;

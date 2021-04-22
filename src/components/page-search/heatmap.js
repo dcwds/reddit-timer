@@ -63,21 +63,30 @@ const Weekday = ({ title, hours }) => {
 const Heatmap = ({ posts }) => {
   const { heatmap } = useHeatmap(posts);
   const weekdays = Object.keys(heatmap);
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ');
 
   return (
-    <S.Heatmap>
-      <S.ReadableHours>
-        <div />
-        {
+    <>
+      <S.Heatmap>
+        <S.ReadableHours>
+          <div />
+          {
           allHours.map((n) => (
             readableHours[n] !== undefined
               ? <ReadableHour key={n} hour={readableHours[n]} />
               : null
           ))
         }
-      </S.ReadableHours>
-      { weekdays.map((d) => <Weekday key={d} title={d} hours={heatmap[d]} />) }
-    </S.Heatmap>
+        </S.ReadableHours>
+        { weekdays.map((d) => <Weekday key={d} title={d} hours={heatmap[d]} />) }
+      </S.Heatmap>
+
+      <S.TimezoneText>
+        All times are shown in your timezone:
+        {' '}
+        <strong>{timezone}</strong>
+      </S.TimezoneText>
+    </>
   );
 };
 
