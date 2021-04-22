@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import useFetchPosts from '../../hooks/use-fetch-posts';
 import SearchContext from './context';
 import SubredditForm from './subreddit-form';
-import useFetchPosts from '../../hooks/use-fetch-posts';
-import * as S from './page-search.style';
 import Heatmap from './heatmap';
+import * as S from './page-search.style';
 
 const SearchPage = () => {
   const { posts, status } = useFetchPosts();

@@ -31,7 +31,9 @@ export const ReadableHours = styled.div`
 
 export const Hour = styled.div`
   background-color: ${({ count }) => getBackgroundColorOfHour(count)};
+  cursor: pointer;
   text-align: center;
+  transition: background-color 0.2s ease-in-out;
 
   /* Maintains 1 / 1 aspect ratio */
   position: relative;
@@ -42,6 +44,11 @@ export const Hour = styled.div`
     height: 0;
     width: 0;
     padding-top: 100%;
+  }
+
+  &:hover, &.selected {
+    background-color: #141926;
+    color: white;
   }
 `;
 
