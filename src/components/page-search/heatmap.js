@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import SearchContext from './context';
 import useHeatmap from '../../hooks/use-heatmap';
 import useMedia from '../../hooks/use-media';
 import { breakpoint } from '../../styles/media-query';
@@ -35,6 +36,26 @@ const ReadableHour = ({ hour }) => {
   );
 };
 
+const HourBlock = ({ count, postIds }) => {
+  const [selected, setSelected] = useState(false);
+  const { handleSelectedPostIds } = useContext(SearchContext);
+
+  const setSelectedAndHandlePostIds = () => {
+    setSelected(!selected);
+    handleSelectedPostIds(!selected, postIds);
+  };
+
+  return (
+    <S.Hour
+      count={count} // Styled component needs to be aware of this value.
+      onClick={setSelectedAndHandlePostIds}
+      className={selected ? 'selected' : ''}
+    >
+      <S.HourCount>{ count }</S.HourCount>
+    </S.Hour>
+  );
+};
+
 const Weekday = ({ title, hours }) => {
   const responsiveTitle = useMedia(
     [`(min-width: ${breakpoint.lg})`],
@@ -46,21 +67,20 @@ const Weekday = ({ title, hours }) => {
     <S.Weekday>
       <S.WeekdayTitle>{ responsiveTitle }</S.WeekdayTitle>
       {
-      allHours.map((n) => {
-        const count = hours[n] !== undefined ? hours[n].count : 0;
-
-        return (
-          <S.Hour key={n} num={n} count={count}>
-            <S.HourCount>{count}</S.HourCount>
-          </S.Hour>
-        );
-      })
+      allHours.map((n) => (
+        <HourBlock
+          key={n}
+          count={hours[n] !== undefined ? hours[n].count : 0}
+          postIds={hours[n] !== undefined ? hours[n].postIds : []}
+        />
+      ))
     }
     </S.Weekday>
   );
 };
 
-const Heatmap = ({ posts }) => {
+const Heatmap = () => {
+  const { posts } = useContext(SearchContext);
   const { heatmap } = useHeatmap(posts);
   const weekdays = Object.keys(heatmap);
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ');
