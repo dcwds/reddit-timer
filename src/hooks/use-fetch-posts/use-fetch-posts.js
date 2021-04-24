@@ -20,7 +20,21 @@ export const fetchPosts = async (
   return fetchPosts(subreddit, postAmount, after, posts);
 };
 
-const useFetchPosts = () => {
+export const getPostsAsHeatmap = (posts) => posts.reduce(
+  (heatmap, curr) => {
+    const heatmapCopy = [...heatmap];
+    const createdAt = new Date(curr.data.created_utc * 1000);
+    const day = createdAt.getDay();
+    const hour = createdAt.getHours();
+
+    heatmapCopy[day][hour] = [...heatmapCopy[day][hour], curr];
+
+    return heatmapCopy;
+  },
+  [...Array(7)].map(() => Array(24).fill([])),
+);
+
+export const useFetchPosts = () => {
   const { subreddit } = useParams();
   const [posts, setPosts] = useState([]);
   const [status, setStatus] = useState('idle');
@@ -44,5 +58,3 @@ const useFetchPosts = () => {
 
   return { posts, status };
 };
-
-export default useFetchPosts;

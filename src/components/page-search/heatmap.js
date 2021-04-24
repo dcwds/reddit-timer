@@ -1,11 +1,8 @@
-import React, { useContext, useState } from 'react';
-import SearchContext from './context';
-import useHeatmap from '../../hooks/use-heatmap';
+import React, { useState } from 'react';
+import { getPostsAsHeatmap } from '../../hooks/use-fetch-posts';
 import useMedia from '../../hooks/use-media';
 import { breakpoint } from '../../styles/media-query';
 import * as S from './heatmap.style';
-
-const allHours = [...Array(24).keys()];
 
 const readableHours = {
   0: '12:00am',
@@ -36,19 +33,13 @@ const ReadableHour = ({ hour }) => {
   );
 };
 
-const HourBlock = ({ count, postIds }) => {
+const HourBlock = ({ count }) => {
   const [selected, setSelected] = useState(false);
-  const { handleSelectedPostIds } = useContext(SearchContext);
-
-  const setSelectedAndHandlePostIds = () => {
-    setSelected(!selected);
-    handleSelectedPostIds(!selected, postIds);
-  };
 
   return (
     <S.Hour
       count={count} // Styled component needs to be aware of this value.
-      onClick={setSelectedAndHandlePostIds}
+      onClick={() => setSelected(!selected)}
       className={selected ? 'selected' : ''}
     >
       <S.HourCount>{ count }</S.HourCount>
@@ -67,22 +58,21 @@ const Weekday = ({ title, hours }) => {
     <S.Weekday>
       <S.WeekdayTitle>{ responsiveTitle }</S.WeekdayTitle>
       {
-      allHours.map((n) => (
-        <HourBlock
-          key={n}
-          count={hours[n] !== undefined ? hours[n].count : 0}
-          postIds={hours[n] !== undefined ? hours[n].postIds : []}
-        />
-      ))
+        hours.map((h, i) => (
+          <HourBlock
+            // eslint-disable-next-line react/no-array-index-key
+            key={i}
+            count={h.length}
+          />
+        ))
     }
     </S.Weekday>
   );
 };
 
-const Heatmap = () => {
-  const { posts } = useContext(SearchContext);
-  const { heatmap } = useHeatmap(posts);
-  const weekdays = Object.keys(heatmap);
+const Heatmap = ({ posts }) => {
+  const heatmap = getPostsAsHeatmap(posts);
+  const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ');
 
   return (
@@ -91,14 +81,24 @@ const Heatmap = () => {
         <S.ReadableHours>
           <div />
           {
-          allHours.map((n) => (
-            readableHours[n] !== undefined
-              ? <ReadableHour key={n} hour={readableHours[n]} />
-              : null
-          ))
-        }
+            [...Array(24).keys()].map((n) => (
+              readableHours[n] !== undefined
+                ? <ReadableHour key={n} hour={readableHours[n]} />
+                : null
+            ))
+          }
         </S.ReadableHours>
-        { weekdays.map((d) => <Weekday key={d} title={d} hours={heatmap[d]} />) }
+        {
+          heatmap.map(
+            (d, i) => (
+              <Weekday
+                key={weekdays[i]}
+                title={weekdays[i]}
+                hours={d}
+              />
+            ),
+          )
+        }
       </S.Heatmap>
 
       <S.TimezoneText>

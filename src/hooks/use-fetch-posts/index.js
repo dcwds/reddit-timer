@@ -1,1 +1,1 @@
-export { default } from './use-fetch-posts';
+export { useFetchPosts as default, getPostsAsHeatmap } from './use-fetch-posts';
