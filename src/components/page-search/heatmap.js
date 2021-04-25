@@ -4,20 +4,20 @@ import useMedia from '../../hooks/use-media';
 import { breakpoint } from '../../styles/media-query';
 import * as S from './heatmap.style';
 
-const readableHours = {
-  0: '12:00am',
-  2: '2:00am',
-  4: '4:00am',
-  6: '6:00am',
-  8: '8:00am',
-  10: '10:00am',
-  12: '12:00pm',
-  14: '2:00pm',
-  16: '4:00pm',
-  18: '6:00pm',
-  20: '8:00pm',
-  22: '10:00pm',
-};
+const readableHours = [
+  '12:00am',
+  '2:00am',
+  '4:00am',
+  '6:00am',
+  '8:00am',
+  '10:00am',
+  '12:00pm',
+  '2:00pm',
+  '4:00pm',
+  '6:00pm',
+  '8:00pm',
+  '10:00pm',
+];
 
 const ReadableHour = ({ hour }) => {
   const responsiveHour = useMedia(
@@ -86,11 +86,7 @@ const Heatmap = ({ posts }) => {
         <S.ReadableHours>
           <div />
           {
-            [...Array(24).keys()].map((n) => (
-              readableHours[n] !== undefined
-                ? <ReadableHour key={n} hour={readableHours[n]} />
-                : null
-            ))
+            readableHours.map((h) => <ReadableHour key={h} hour={h} />)
           }
         </S.ReadableHours>
         {
