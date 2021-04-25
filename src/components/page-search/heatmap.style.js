@@ -16,8 +16,7 @@ const getBackgroundColorOfHour = (hourCount) => ({
 export const ReadableHourText = styled.div`
   background: linear-gradient(#FEFEFE, #E9E9E9);
   height: 3.125em; /* 50px */
-  
-  /* Center text */
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +45,7 @@ export const Hour = styled.div`
     padding-top: 100%;
   }
 
-  &:hover, &.selected {
+  &:hover, &:focus, &.selected {
     background-color: #141926;
     color: white;
   }
@@ -60,7 +59,6 @@ export const HourCount = styled.span`
   top: 0;
   left: 0;
 
-  /* Center text */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,7 +74,6 @@ export const WeekdayTitle = styled.span`
   font-weight: 600;
   text-transform: capitalize;
 
-  /* Center text */
   display: flex;
   justify-content: center;
   align-items: center;

@@ -36,11 +36,16 @@ const ReadableHour = ({ hour }) => {
 const HourBlock = ({ count }) => {
   const [selected, setSelected] = useState(false);
 
+  const onKeyDown = (e) => ((e.key === ' ' || e.key === 'Enter') ? setSelected(!selected) : null);
+
   return (
     <S.Hour
       count={count} // Styled component needs to be aware of this value.
       onClick={() => setSelected(!selected)}
+      onKeyDown={onKeyDown}
       className={selected ? 'selected' : ''}
+      role="button"
+      tabIndex={0}
     >
       <S.HourCount>{ count }</S.HourCount>
     </S.Hour>
