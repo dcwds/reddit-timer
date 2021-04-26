@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { getPostsAsHeatmap } from '../../hooks/use-fetch-posts';
+import React, { useMemo, useState } from 'react';
+import { getPostsPerDay } from '../../hooks/use-fetch-posts';
 import useMedia from '../../hooks/use-media';
 import { breakpoint } from '../../styles/media-query';
 import * as S from './heatmap.style';
@@ -33,51 +33,51 @@ const ReadableHour = ({ hour }) => {
   );
 };
 
-const HourBlock = ({ count }) => {
-  const [selected, setSelected] = useState(false);
-
-  const onKeyDown = (e) => ((e.key === ' ' || e.key === 'Enter') ? setSelected(!selected) : null);
-
-  return (
-    <S.Hour
-      count={count} // Styled component needs to be aware of this value.
-      onClick={() => setSelected(!selected)}
-      onKeyDown={onKeyDown}
-      className={selected ? 'selected' : ''}
-      role="button"
-      tabIndex={0}
-    >
-      <S.HourCount>{ count }</S.HourCount>
-    </S.Hour>
-  );
-};
-
-const Weekday = ({ title, hours }) => {
+const Weekday = ({
+  day,
+  postsPerHour,
+  activeCell,
+  setActiveCell,
+}) => {
+  const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
   const responsiveTitle = useMedia(
     [`(min-width: ${breakpoint.lg})`],
-    [title],
-    title.slice(0, 3),
+    [weekdays[day]],
+    weekdays[day].slice(0, 3),
   );
 
   return (
     <S.Weekday>
       <S.WeekdayTitle>{ responsiveTitle }</S.WeekdayTitle>
       {
-        hours.map((h, i) => (
-          <HourBlock
-            // eslint-disable-next-line react/no-array-index-key
-            key={i}
-            count={h.length}
-          />
-        ))
+        postsPerHour.map((posts, hour) => {
+          const onKeyDown = (e) => (
+            (e.key === ' ' || e.key === 'Enter') ? setActiveCell({ day, hour }) : null
+          );
+
+          return (
+            <S.HourCell
+              // eslint-disable-next-line react/no-array-index-key
+              key={hour}
+              isActive={activeCell.day === day && activeCell.hour === hour}
+              onClick={() => setActiveCell({ day, hour })}
+              onKeyDown={onKeyDown}
+              postCount={posts.length}
+              role="button"
+              tabIndex={0}
+            >
+              <S.HourCount>{posts.length}</S.HourCount>
+            </S.HourCell>
+          );
+        })
     }
     </S.Weekday>
   );
 };
 
 const Heatmap = ({ posts }) => {
-  const heatmap = getPostsAsHeatmap(posts);
-  const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  const [activeCell, setActiveCell] = useState({ day: null, hour: null });
+  const postsPerDay = useMemo(() => getPostsPerDay(posts), [posts]);
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ');
 
   return (
@@ -90,12 +90,15 @@ const Heatmap = ({ posts }) => {
           }
         </S.ReadableHours>
         {
-          heatmap.map(
-            (d, i) => (
+          postsPerDay.map(
+            (postsPerHour, day) => (
               <Weekday
-                key={weekdays[i]}
-                title={weekdays[i]}
-                hours={d}
+                // eslint-disable-next-line react/no-array-index-key
+                key={day}
+                day={day}
+                postsPerHour={postsPerHour}
+                activeCell={activeCell}
+                setActiveCell={setActiveCell}
               />
             ),
           )

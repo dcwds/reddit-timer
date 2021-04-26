@@ -20,7 +20,7 @@ export const fetchPosts = async (
   return fetchPosts(subreddit, postAmount, after, posts);
 };
 
-export const getPostsAsHeatmap = (posts) => posts.reduce(
+export const getPostsPerDay = (posts) => posts.reduce(
   (heatmap, curr) => {
     const heatmapCopy = [...heatmap];
     const createdAt = new Date(curr.data.created_utc * 1000);

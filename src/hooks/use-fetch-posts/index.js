@@ -1,1 +1,1 @@
-export { useFetchPosts as default, getPostsAsHeatmap } from './use-fetch-posts';
+export { useFetchPosts as default, getPostsPerDay } from './use-fetch-posts';

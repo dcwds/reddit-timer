@@ -28,8 +28,8 @@ export const ReadableHours = styled.div`
   grid-template-columns: 2fr repeat(12, 1fr);
 `;
 
-export const Hour = styled.div`
-  background-color: ${({ count }) => getBackgroundColorOfHour(count)};
+export const HourCell = styled.div`
+  background-color: ${({ isActive, postCount }) => (isActive ? '#141926' : getBackgroundColorOfHour(postCount))};
   cursor: pointer;
   text-align: center;
   transition: background-color 0.2s ease-in-out;
