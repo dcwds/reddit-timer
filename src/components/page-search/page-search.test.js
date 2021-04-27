@@ -62,12 +62,36 @@ describe('subreddit form', () => {
 });
 
 describe('heatmap', () => {
-  it('loads posts after subreddit submission', async () => {
+  it('loads posts into heatmap via subreddit in URL', async () => {
     setup('/search/reactjs');
 
     // A `timeout` is specified equal to the CSS animation duration for the spinner element (1500ms)
     await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i), { timeout: 1500 });
-    expect(await screen.findByLabelText(/heatmap/i)).toBeInTheDocument();
+
+    const heatmap = screen.getByLabelText(/heatmap/i);
+    expect(heatmap).toBeInTheDocument();
+
+    const cells = await within(heatmap).findAllByRole('button');
+    expect(cells.length).toBe(7 * 24);
+
+    const numPostsPerCell = cells.map((c) => c.innerHTML);
+    expect(numPostsPerCell).toMatchSnapshot();
+
+    expect(within(screen.getByLabelText(/timezone/i)).getByText('Europe/Berlin')).toBeInTheDocument();
+  });
+
+  it('highlights cells when they are clicked', async () => {
+    setup('/search/reactjs');
+
+    const heatmap = await screen.findByLabelText(/heatmap/i);
+    const cells = await within(heatmap).findAllByRole('button');
+    const cellToClick = cells[1];
+    const clickedBgStyle = 'background-color: #141926';
+
+    expect(cellToClick).not.toHaveStyle(clickedBgStyle);
+
+    userEvent.click(cellToClick);
+    expect(cellToClick).toHaveStyle(clickedBgStyle);
   });
 
   it('renders error message', async () => {

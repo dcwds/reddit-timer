@@ -87,7 +87,9 @@ export const Heatmap = styled.div.attrs({
   font-size: ${(props) => props.theme.font.size.sm};
 `;
 
-export const TimezoneText = styled.p`
+export const TimezoneText = styled.p.attrs({
+  'aria-label': 'timezone',
+})`
   font-size: ${(props) => props.theme.font.size.sm};
   text-align: center;
 `;
