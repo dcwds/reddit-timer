@@ -45,7 +45,7 @@ export const HourCell = styled.div`
     padding-top: 100%;
   }
 
-  &:hover, &:focus, &.selected {
+  &:hover, &:focus {
     background-color: #141926;
     color: white;
   }
@@ -79,7 +79,9 @@ export const WeekdayTitle = styled.span`
   align-items: center;
 `;
 
-export const Heatmap = styled.div`
+export const Heatmap = styled.div.attrs({
+  'aria-label': 'heatmap',
+})`
   color: white;
   font-weight: 500;
   font-size: ${(props) => props.theme.font.size.sm};
