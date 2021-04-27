@@ -8,25 +8,21 @@ import Header from '../header';
 import SearchPage from './page-search';
 import { DEFAULT_SUBREDDIT } from '../../constants';
 
-describe('page: search', () => {
-  const mockResponse = { data: { children: [] } };
-  let page = null;
+// A `Route` with params needs to be included, otherwise
+// `useParams` hook within component returns `undefined`
+const setup = (route) => render(
+  <>
+    <Header />
+    <Route path="/search/:subreddit">
+      <SearchPage />
+    </Route>
+  </>,
+  { route },
+);
 
-  beforeEach(() => {
-    // A `Route` with params needs to be included, otherwise
-    // `useParams` hook within component returns `undefined`.
-    page = render(
-      <>
-        <Header />
-        <Route path="/search/:subreddit">
-          <SearchPage />
-        </Route>
-      </>,
-      { route: '/search/reactjs' },
-    );
-  });
-
+describe('subreddit form', () => {
   it('updates url when form is submitted via button click', () => {
+    const { history } = setup('/search/reactjs');
     const input = screen.getByRole('textbox');
     const button = screen.getByRole('button', { name: /search/i });
 
@@ -37,20 +33,22 @@ describe('page: search', () => {
     expect(input.value).toBe('vuejs');
 
     userEvent.click(button);
-    expect(page.history.location.pathname).toBe('/search/vuejs');
+    expect(history.location.pathname).toBe('/search/vuejs');
   });
 
   it('updates url when form is submitted via \'Enter\' key on input', () => {
+    const { history } = setup('/search/reactjs');
     const input = screen.getByRole('textbox');
     expect(input.value).toBe('reactjs');
 
     userEvent.clear(input);
     userEvent.type(input, 'vuejs');
     userEvent.type(input, '{enter}'); // simulates `keyDown` of `Enter` key
-    expect(page.history.location.pathname).toBe('/search/vuejs');
+    expect(history.location.pathname).toBe('/search/vuejs');
   });
 
-  it('updates subreddit input value when header search link is clicked', async () => {
+  it('updates subreddit input value when header search link is clicked', () => {
+    setup('/search/reactjs');
     const input = screen.getByRole('textbox');
     const header = screen.getByRole('banner');
     const searchLink = within(header).getByRole('link', { name: /search/i });
@@ -61,22 +59,42 @@ describe('page: search', () => {
 
     expect(input.value).toBe(DEFAULT_SUBREDDIT);
   });
+});
 
-  // Presently, this test issues a warning about wrapping certain calls with `act`.
-  // I tried using this strategy: https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning
-  // Need to fix.
-  it('loads posts after subreddit submission', async () => {
-    fetch.mockOnce(JSON.stringify(mockResponse));
-    const input = screen.getByRole('textbox');
+describe('heatmap', () => {
+  it('loads posts into heatmap via subreddit in URL', async () => {
+    setup('/search/reactjs');
 
-    userEvent.clear(input);
-    userEvent.type(input, 'vuejs');
-    userEvent.type(input, '{enter}');
+    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
-    expect(fetch).toHaveBeenCalledWith('https://www.reddit.com/r/vuejs/top.json?t=year&limit=100');
-    await waitForElementToBeRemoved(screen.getByLabelText(/loading/i));
+    const heatmap = screen.getByLabelText(/heatmap/i);
+    expect(heatmap).toBeInTheDocument();
 
-    // use `queryBy` to avoid an error being thrown with `getBy` due to element not existing.
-    expect(screen.queryByLabelText(/error/i)).not.toBeInTheDocument();
+    const cells = await within(heatmap).findAllByRole('button');
+    expect(cells.length).toBe(7 * 24);
+
+    const numPostsPerCell = cells.map((c) => c.innerHTML);
+    expect(numPostsPerCell).toMatchSnapshot();
+
+    expect(within(screen.getByLabelText(/timezone/i)).getByText('Europe/Berlin')).toBeInTheDocument();
+  });
+
+  it('highlights cells when they are clicked', async () => {
+    setup('/search/reactjs');
+
+    const heatmap = await screen.findByLabelText(/heatmap/i);
+    const cells = await within(heatmap).findAllByRole('button');
+    const cellToClick = cells[1];
+    const clickedBgStyle = 'background-color: #141926';
+
+    expect(cellToClick).not.toHaveStyle(clickedBgStyle);
+
+    userEvent.click(cellToClick);
+    expect(cellToClick).toHaveStyle(clickedBgStyle);
+  });
+
+  it('renders error message', async () => {
+    setup('/search/failing-request');
+    expect(await screen.findByLabelText(/error/i)).toBeInTheDocument();
   });
 });

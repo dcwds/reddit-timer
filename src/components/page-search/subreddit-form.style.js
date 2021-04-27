@@ -4,6 +4,7 @@ export const FormWrapper = styled.div`
   display: flex;
   height: 2.25rem; /* 36px */
   margin: 0 auto;
+  margin-bottom: 3.75em; /* 60px */
   max-width: 31.25rem; /* 500px */
 `;
 

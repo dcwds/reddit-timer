@@ -1,24 +1,39 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { MAX_NUM_POSTS_PER_PAGE, NUM_POSTS_TO_FETCH } from '../../constants';
 
 export const fetchPosts = async (
   subreddit,
-  postAmount = 500,
+  abortController,
+  postAmount = NUM_POSTS_TO_FETCH,
   lastPostId = null,
   fetchedPosts = [],
 ) => {
-  const response = await fetch(`https://www.reddit.com/r/${subreddit}/top.json?t=year&limit=100${lastPostId ? `&after=${lastPostId}` : ''}`);
+  const url = `https://www.reddit.com/r/${subreddit}/top.json?t=year&limit=${MAX_NUM_POSTS_PER_PAGE}${lastPostId ? `&after=${lastPostId}` : ''}`;
+  const response = await fetch(url, { signal: abortController.signal });
 
-  if (!response.ok) return fetchedPosts;
-
-  const { data: { children, after } } = await response.json();
+  const { data: { children, after, dist } } = await response.json();
   const posts = fetchedPosts.concat(children);
-  const noMorePosts = children.length < 100; // based on `limit` parameter in url
+  const noMorePosts = dist && dist < MAX_NUM_POSTS_PER_PAGE;
 
   if (posts.length >= postAmount || noMorePosts) return posts.slice(0, postAmount);
 
-  return fetchPosts(subreddit, postAmount, after, posts);
+  return fetchPosts(subreddit, abortController, postAmount, after, posts);
 };
+
+export const getPostsPerDay = (posts) => posts.reduce(
+  (heatmap, curr) => {
+    const heatmapCopy = [...heatmap];
+    const createdAt = new Date(curr.data.created_utc * 1000);
+    const day = createdAt.getDay();
+    const hour = createdAt.getHours();
+
+    heatmapCopy[day][hour] = [...heatmapCopy[day][hour], curr];
+
+    return heatmapCopy;
+  },
+  [...Array(7)].map(() => Array(24).fill([])),
+);
 
 const useFetchPosts = () => {
   const { subreddit } = useParams();
@@ -26,20 +41,25 @@ const useFetchPosts = () => {
   const [status, setStatus] = useState('idle');
 
   useEffect(() => {
+    const abortController = new AbortController();
     setStatus('loading');
 
     const getPosts = async (subr) => {
       try {
-        const fetchedPosts = await fetchPosts(subr, 500);
+        const fetchedPosts = await fetchPosts(subr, abortController);
 
         setPosts(fetchedPosts);
         setStatus('resolved');
       } catch (err) {
-        setStatus('error');
+        if (!abortController.signal.aborted) {
+          setStatus('error');
+        }
       }
     };
 
     getPosts(subreddit);
+
+    return () => abortController.abort();
   }, [subreddit]);
 
   return { posts, status };
