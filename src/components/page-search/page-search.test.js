@@ -65,8 +65,7 @@ describe('heatmap', () => {
   it('loads posts into heatmap via subreddit in URL', async () => {
     setup('/search/reactjs');
 
-    // A `timeout` is specified equal to the CSS animation duration for the spinner element (1500ms)
-    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i), { timeout: 1500 });
+    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
     const heatmap = screen.getByLabelText(/heatmap/i);
     expect(heatmap).toBeInTheDocument();
