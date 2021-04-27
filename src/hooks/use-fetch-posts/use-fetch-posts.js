@@ -35,7 +35,7 @@ export const getPostsPerDay = (posts) => posts.reduce(
   [...Array(7)].map(() => Array(24).fill([])),
 );
 
-export const useFetchPosts = () => {
+const useFetchPosts = () => {
   const { subreddit } = useParams();
   const [posts, setPosts] = useState([]);
   const [status, setStatus] = useState('idle');
@@ -64,3 +64,5 @@ export const useFetchPosts = () => {
 
   return { posts, status };
 };
+
+export default useFetchPosts;
