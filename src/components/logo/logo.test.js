@@ -1,16 +1,12 @@
 import React from 'react';
 import Logo from './logo';
-import { render, fireEvent } from '../../test-utils';
+import { render, fireEvent, screen } from '../../test-utils';
 
 describe('logo', () => {
   it('routes to homepage', () => {
-    const { getByRole, history } = render(<Logo />);
-    const spyHistoryPush = jest.spyOn(history, 'push');
+    const { history } = render(<Logo />);
 
-    fireEvent.click(getByRole('link', { name: /logo/i }));
-
-    expect(spyHistoryPush).toHaveBeenCalledWith('/');
-
-    spyHistoryPush.mockRestore();
+    fireEvent.click(screen.getByRole('link', { name: /logo/i }));
+    expect(history.location.pathname).toBe('/');
   });
 });
