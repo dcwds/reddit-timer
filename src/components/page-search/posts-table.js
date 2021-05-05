@@ -1,4 +1,5 @@
 import React from 'react';
+import * as S from './posts-table.style';
 
 const getTimeInAMPM = (timestamp) => {
   const time = new Date(timestamp * 1000);
@@ -22,50 +23,57 @@ const PostsTable = ({ posts }) => {
   );
 
   return (
-    <article>
+    <S.PostsTableWrapper>
       <h2>Posts</h2>
-      {sortedPosts.map((p) => {
-        const { data } = p;
 
-        return (
-          <div key={data.title.toLowerCase()}>
-            <div>
-              <a
-                href={`https://www.reddit.com/${data.permalink}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {data.title}
-              </a>
-            </div>
-            <div>
-              {getTimeInAMPM(data.created_utc)}
-            </div>
-            <div>
-              {data.ups}
-            </div>
-            <div>
-              {data.num_comments}
-            </div>
-            <div>
-              {
-              data.author !== '[deleted]'
-                ? (
+      <S.PostsTable>
+        <S.PostsTableHeadings>
+          <S.PostsTableHeading>Title</S.PostsTableHeading>
+          <S.PostsTableHeading>Time Posted</S.PostsTableHeading>
+          <S.PostsTableHeading>Score</S.PostsTableHeading>
+          <S.PostsTableHeading>Comments</S.PostsTableHeading>
+          <S.PostsTableHeading>Author</S.PostsTableHeading>
+        </S.PostsTableHeadings>
+
+        <div>
+          {sortedPosts.map((p) => {
+            const { data } = p;
+
+            return (
+              <S.PostsTableRow key={data.title.toLowerCase()}>
+                <div>
                   <a
-                    href={`https://www.reddit.com/u/${data.author}`}
+                    href={`https://www.reddit.com/${data.permalink}`}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {data.author}
+                    {data.title}
                   </a>
-                )
-                : data.author
-            }
-            </div>
-          </div>
-        );
-      })}
-    </article>
+                </div>
+                <div>{getTimeInAMPM(data.created_utc)}</div>
+                <div>{data.ups}</div>
+                <div>{data.num_comments}</div>
+                <div>
+                  {
+                    data.author !== '[deleted]'
+                      ? (
+                        <a
+                          href={`https://www.reddit.com/u/${data.author}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {data.author}
+                        </a>
+                      )
+                      : data.author
+                  }
+                </div>
+              </S.PostsTableRow>
+            );
+          })}
+        </div>
+      </S.PostsTable>
+    </S.PostsTableWrapper>
   );
 };
 

@@ -5,7 +5,7 @@ const Container = styled.article`
   ${mediaQuery(breakpoint.md, css`
     margin-left: auto;
     margin-right: auto;
-    max-width: 46.25rem; /* 740px */
+    max-width: 48.75rem; /* 780px */
   `)}
 `;
 
