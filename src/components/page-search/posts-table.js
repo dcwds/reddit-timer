@@ -11,7 +11,7 @@ const getTimeInAMPM = (timestamp) => {
   }).toLowerCase();
 };
 
-const getTimeNum = (timestamp) => {
+const getTimeAsNum = (timestamp) => {
   const time = new Date(timestamp * 1000);
 
   return Number(`${time.getHours()}${time.getMinutes()}`);
@@ -19,7 +19,7 @@ const getTimeNum = (timestamp) => {
 
 const PostsTable = ({ posts }) => {
   const sortedPosts = posts.slice().sort(
-    (a, b) => getTimeNum(a.data.created_utc) - getTimeNum(b.data.created_utc),
+    (a, b) => getTimeAsNum(a.data.created_utc) - getTimeAsNum(b.data.created_utc),
   );
 
   return (
@@ -43,6 +43,7 @@ const PostsTable = ({ posts }) => {
               <S.PostsTableRow key={data.title.toLowerCase()}>
                 <div>
                   <a
+                    aria-label="title"
                     href={`https://www.reddit.com/${data.permalink}`}
                     target="_blank"
                     rel="noreferrer"

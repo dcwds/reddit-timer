@@ -93,6 +93,27 @@ describe('heatmap', () => {
     expect(cellToClick).toHaveStyle(clickedBgStyle);
   });
 
+  it('shows post table with correct post titles', async () => {
+    setup('/search/5-posts');
+
+    const heatmap = await screen.findByLabelText(/heatmap/i);
+    const cells = await within(heatmap).findAllByRole('button');
+    const cellToClick = cells[95]; // Wed at 11pm Europe/Berlin
+
+    userEvent.click(cellToClick);
+    const postsTable = await screen.findByLabelText(/posts table/i);
+    const posts = await within(postsTable).findAllByLabelText(/title/i);
+    const titles = posts.map((p) => p.textContent);
+
+    expect(titles).toEqual([
+      'test post 1',
+      'test post 2',
+      'test post 3',
+      'test post 4',
+      'test post 5',
+    ]);
+  });
+
   it('renders error message', async () => {
     setup('/search/failing-request');
     expect(await screen.findByLabelText(/error/i)).toBeInTheDocument();

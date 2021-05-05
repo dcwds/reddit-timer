@@ -1,5 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`useFetchPosts loads 5 posts from reddit 1`] = `
+Array [
+  Object {
+    "data": Object {
+      "author": "test",
+      "created_utc": 1620248400,
+      "num_comments": 1,
+      "permalink": "",
+      "title": "test post 1",
+      "ups": 5,
+    },
+    "kind": "t3",
+  },
+  Object {
+    "data": Object {
+      "author": "test",
+      "created_utc": 1620248400,
+      "num_comments": 1,
+      "permalink": "",
+      "title": "test post 2",
+      "ups": 5,
+    },
+    "kind": "t3",
+  },
+  Object {
+    "data": Object {
+      "author": "test",
+      "created_utc": 1620248400,
+      "num_comments": 1,
+      "permalink": "",
+      "title": "test post 3",
+      "ups": 5,
+    },
+    "kind": "t3",
+  },
+  Object {
+    "data": Object {
+      "author": "test",
+      "created_utc": 1620248400,
+      "num_comments": 1,
+      "permalink": "",
+      "title": "test post 4",
+      "ups": 5,
+    },
+    "kind": "t3",
+  },
+  Object {
+    "data": Object {
+      "author": "test",
+      "created_utc": 1620248400,
+      "num_comments": 1,
+      "permalink": "",
+      "title": "test post 5",
+      "ups": 5,
+    },
+    "kind": "t3",
+  },
+]
+`;
+
 exports[`useFetchPosts loads 500 posts from reddit 1`] = `
 Array [
   Object {

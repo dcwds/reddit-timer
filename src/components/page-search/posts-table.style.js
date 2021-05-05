@@ -27,7 +27,9 @@ export const PostsTableWrapper = styled(Container)`
   margin-top: 2.5em; /* 40px */
 `;
 
-export const PostsTable = styled.div`
+export const PostsTable = styled.div.attrs({
+  'aria-label': 'posts table',
+})`
   border-width: 1px;
   border-style: solid;
   border-color: ${({ theme }) => theme.color.table.border};

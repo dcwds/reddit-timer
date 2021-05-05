@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import responseFivePosts from './reddit-5-posts.json';
 import response1 from './reddit-response-1.json'; // r/javascript/top.json?t=year&limit=100
 import response2 from './reddit-response-2.json'; // r/javascript/top.json?t=year&limit=100&after=t3_gju3am
 import response3 from './reddit-response-3.json'; // r/javascript/top.json?t=year&limit=100&after=t3_hxm70h
@@ -35,6 +36,11 @@ const handlers = [
       ctx.json(json),
     );
   }),
+
+  rest.get('https://www.reddit.com/r/5-posts/top.json', (req, res, ctx) => res(
+    ctx.status(200),
+    ctx.json(responseFivePosts),
+  )),
 
   rest.get('https://www.reddit.com/r/failing-request/top.json', (req, res, ctx) => {
     const after = req.url.searchParams.get('after');
