@@ -44,7 +44,7 @@ const PostsTable = ({ posts }) => {
                 <div>
                   <a
                     aria-label="title"
-                    href={`https://reddit.com/${data.permalink}`}
+                    href={`https://reddit.com${data.permalink}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
