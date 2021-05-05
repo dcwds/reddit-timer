@@ -23,7 +23,7 @@ describe('useFetchPosts', () => {
     expect(result.current.status).toBe('loading');
     expect(result.current.posts).toEqual([]);
 
-    await waitForNextUpdate();
+    await waitForNextUpdate({ timeout: 10000 });
 
     expect(result.current.status).toBe('resolved');
     expect(result.current.posts.length).toBe(500);

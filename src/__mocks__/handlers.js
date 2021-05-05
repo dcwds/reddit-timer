@@ -1,16 +1,16 @@
 import { rest } from 'msw';
-import response1 from './posts-response-1.json'; // r/javascript/top.json?t=year&limit=100
-import response2 from './posts-response-2.json'; // r/javascript/top.json?t=year&limit=100&after=t3_jquo97
-import response3 from './posts-response-3.json'; // r/javascript/top.json?t=year&limit=100&after=t3_l4rh5c
-import response4 from './posts-response-4.json'; // r/javascript/top.json?t=year&limit=100&after=t3_in4z6d
-import response5 from './posts-response-5.json'; // r/javascript/top.json?t=year&limit=100&after=t3_hj92fb
+import response1 from './reddit-response-1.json'; // r/javascript/top.json?t=year&limit=100
+import response2 from './reddit-response-2.json'; // r/javascript/top.json?t=year&limit=100&after=t3_gju3am
+import response3 from './reddit-response-3.json'; // r/javascript/top.json?t=year&limit=100&after=t3_hxm70h
+import response4 from './reddit-response-4.json'; // r/javascript/top.json?t=year&limit=100&after=t3_jwphd6
+import response5 from './reddit-response-5.json'; // r/javascript/top.json?t=year&limit=100&after=t3_ltfo7v
 
 const responseMap = {
   initial: response1,
-  t3_jquo97: response2,
-  t3_l4rh5c: response3,
-  t3_in4z6d: response4,
-  t3_hj92fb: response5,
+  t3_gju3am: response2,
+  t3_hxm70h: response3,
+  t3_jwphd6: response4,
+  t3_ltfo7v: response5,
 };
 
 const getJSONResponseForRequest = (req) => {
@@ -24,7 +24,7 @@ const handlers = [
     const after = req.url.searchParams.get('after');
     const json = getJSONResponseForRequest(req);
 
-    if (after === 't3_l4rh5c') {
+    if (after === 't3_hxm70h') {
       json.data.dist = 70;
       json.data.after = null;
       json.data.children = json.data.children.slice(0, 70);
@@ -39,7 +39,7 @@ const handlers = [
   rest.get('https://www.reddit.com/r/failing-request/top.json', (req, res, ctx) => {
     const after = req.url.searchParams.get('after');
 
-    if (after === 't3_l4rh5c') {
+    if (after === 't3_hxm70h') {
       return res(
         ctx.status(500),
         ctx.json({ errorMessage: 'Internal server error' }),

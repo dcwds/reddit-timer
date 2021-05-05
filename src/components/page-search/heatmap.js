@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { getPostsPerDay } from '../../hooks/use-fetch-posts';
 import useMedia from '../../hooks/use-media';
 import { breakpoint } from '../../styles/media-query';
+import PostsTable from './posts-table';
 import * as S from './heatmap.style';
 
 const readableHours = [
@@ -38,6 +39,7 @@ const Weekday = ({
   postsPerHour,
   activeCell,
   setActiveCell,
+  setSelectedPosts,
 }) => {
   const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
   const responsiveTitle = useMedia(
@@ -51,6 +53,11 @@ const Weekday = ({
       <S.WeekdayTitle>{ responsiveTitle }</S.WeekdayTitle>
       {
         postsPerHour.map((posts, hour) => {
+          const onClick = () => {
+            setActiveCell({ day, hour });
+            setSelectedPosts(posts);
+          };
+
           const onKeyDown = (e) => (
             (e.key === ' ' || e.key === 'Enter') ? setActiveCell({ day, hour }) : null
           );
@@ -60,7 +67,7 @@ const Weekday = ({
               // eslint-disable-next-line react/no-array-index-key
               key={hour}
               isActive={activeCell.day === day && activeCell.hour === hour}
-              onClick={() => setActiveCell({ day, hour })}
+              onClick={onClick}
               onKeyDown={onKeyDown}
               postCount={posts.length}
               role="button"
@@ -77,6 +84,7 @@ const Weekday = ({
 
 const Heatmap = ({ posts }) => {
   const [activeCell, setActiveCell] = useState({ day: null, hour: null });
+  const [selectedPosts, setSelectedPosts] = useState([]);
   const postsPerDay = useMemo(() => getPostsPerDay(posts), [posts]);
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ');
 
@@ -99,6 +107,7 @@ const Heatmap = ({ posts }) => {
                 postsPerHour={postsPerHour}
                 activeCell={activeCell}
                 setActiveCell={setActiveCell}
+                setSelectedPosts={setSelectedPosts}
               />
             ),
           )
@@ -110,6 +119,8 @@ const Heatmap = ({ posts }) => {
         {' '}
         <strong>{timezone}</strong>
       </S.TimezoneText>
+
+      { !!selectedPosts.length && <PostsTable posts={selectedPosts} />}
     </>
   );
 };

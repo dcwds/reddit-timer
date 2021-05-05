@@ -65,7 +65,7 @@ describe('heatmap', () => {
   it('loads posts into heatmap via subreddit in URL', async () => {
     setup('/search/reactjs');
 
-    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i), { timeout: 10000 });
 
     const heatmap = screen.getByLabelText(/heatmap/i);
     expect(heatmap).toBeInTheDocument();
