@@ -44,9 +44,9 @@ const PostsTable = ({ posts }) => {
                 <div>
                   <a
                     aria-label="title"
-                    href={`https://www.reddit.com/${data.permalink}`}
+                    href={`https://reddit.com/${data.permalink}`}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                   >
                     {data.title}
                   </a>
@@ -59,9 +59,9 @@ const PostsTable = ({ posts }) => {
                     data.author !== '[deleted]'
                       ? (
                         <a
-                          href={`https://www.reddit.com/u/${data.author}`}
+                          href={`https://reddit.com/u/${data.author}`}
                           target="_blank"
-                          rel="noreferrer"
+                          rel="noopener noreferrer"
                         >
                           {data.author}
                         </a>
