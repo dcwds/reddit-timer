@@ -39,7 +39,6 @@ const Weekday = ({
   postsPerHour,
   activeCell,
   setActiveCell,
-  setSelectedPosts,
 }) => {
   const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
   const responsiveTitle = useMedia(
@@ -53,11 +52,6 @@ const Weekday = ({
       <S.WeekdayTitle>{ responsiveTitle }</S.WeekdayTitle>
       {
         postsPerHour.map((posts, hour) => {
-          const onClick = () => {
-            setActiveCell({ day, hour });
-            setSelectedPosts(posts);
-          };
-
           const onKeyDown = (e) => (
             (e.key === ' ' || e.key === 'Enter') ? setActiveCell({ day, hour }) : null
           );
@@ -67,7 +61,7 @@ const Weekday = ({
               // eslint-disable-next-line react/no-array-index-key
               key={hour}
               isActive={activeCell.day === day && activeCell.hour === hour}
-              onClick={onClick}
+              onClick={() => setActiveCell({ day, hour })}
               onKeyDown={onKeyDown}
               postCount={posts.length}
               role="button"
@@ -84,9 +78,11 @@ const Weekday = ({
 
 const Heatmap = ({ posts }) => {
   const [activeCell, setActiveCell] = useState({ day: null, hour: null });
-  const [selectedPosts, setSelectedPosts] = useState([]);
   const postsPerDay = useMemo(() => getPostsPerDay(posts), [posts]);
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ');
+
+  const { day, hour } = activeCell;
+  const selectedPosts = postsPerDay[day] ? postsPerDay[day][hour] : [];
 
   return (
     <>
@@ -99,15 +95,14 @@ const Heatmap = ({ posts }) => {
         </S.ReadableHours>
         {
           postsPerDay.map(
-            (postsPerHour, day) => (
+            (postsPerHour, d) => (
               <Weekday
                 // eslint-disable-next-line react/no-array-index-key
-                key={day}
-                day={day}
+                key={d}
+                day={d}
                 postsPerHour={postsPerHour}
                 activeCell={activeCell}
                 setActiveCell={setActiveCell}
-                setSelectedPosts={setSelectedPosts}
               />
             ),
           )

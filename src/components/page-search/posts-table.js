@@ -1,25 +1,9 @@
 import React from 'react';
 import * as S from './posts-table.style';
 
-const getTimeInAMPM = (timestamp) => {
-  const time = new Date(timestamp * 1000);
-
-  return time.toLocaleString('en-US', {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  }).toLowerCase();
-};
-
-const getTimeAsNum = (timestamp) => {
-  const time = new Date(timestamp * 1000);
-
-  return Number(`${time.getHours()}${time.getMinutes()}`);
-};
-
 const PostsTable = ({ posts }) => {
   const sortedPosts = posts.slice().sort(
-    (a, b) => getTimeAsNum(a.data.created_utc) - getTimeAsNum(b.data.created_utc),
+    (a, b) => a.createdAt.hoursNum - b.createdAt.hoursNum,
   );
 
   return (
@@ -36,42 +20,38 @@ const PostsTable = ({ posts }) => {
         </S.PostsTableHeadings>
 
         <div>
-          {sortedPosts.map((p) => {
-            const { data } = p;
-
-            return (
-              <S.PostsTableRow key={data.title.toLowerCase()}>
-                <div>
-                  <a
-                    aria-label="title"
-                    href={`https://reddit.com${data.permalink}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {data.title}
-                  </a>
-                </div>
-                <div>{getTimeInAMPM(data.created_utc)}</div>
-                <div>{data.ups}</div>
-                <div>{data.num_comments}</div>
-                <div>
-                  {
-                    data.author !== '[deleted]'
+          {sortedPosts.map((p) => (
+            <S.PostsTableRow key={p.title.toLowerCase()}>
+              <div>
+                <a
+                  aria-label="title"
+                  href={`https://reddit.com${p.link}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {p.title}
+                </a>
+              </div>
+              <div>{p.createdAt.hoursText}</div>
+              <div>{p.upvoteCount}</div>
+              <div>{p.commentCount}</div>
+              <div>
+                {
+                    p.author !== '[deleted]'
                       ? (
                         <a
-                          href={`https://reddit.com/u/${data.author}`}
+                          href={`https://reddit.com/u/${p.author}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {data.author}
+                          {p.author}
                         </a>
                       )
-                      : data.author
+                      : p.author
                   }
-                </div>
-              </S.PostsTableRow>
-            );
-          })}
+              </div>
+            </S.PostsTableRow>
+          ))}
         </div>
       </S.PostsTable>
     </S.PostsTableWrapper>

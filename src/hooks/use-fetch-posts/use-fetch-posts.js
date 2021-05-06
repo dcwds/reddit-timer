@@ -2,6 +2,28 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MAX_NUM_POSTS_PER_PAGE, NUM_POSTS_TO_FETCH } from '../../constants';
 
+export const postsWithNeededData = (posts) => posts.map((p) => {
+  const time = new Date(p.data.created_utc * 1000);
+
+  return ({
+    author: p.data.author,
+    title: p.data.title,
+    link: p.data.permalink,
+    createdAt: {
+      timestamp: p.data.created_utc,
+      hoursText: time.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+      }).toLowerCase(),
+      hoursNum: Number(`${time.getHours()}${time.getMinutes()}`), // used for sorting
+    },
+    commentCount: p.data.num_comments,
+    upvoteCount: p.data.ups,
+  }
+  );
+});
+
 export const fetchPosts = async (
   subreddit,
   abortController,
@@ -13,7 +35,7 @@ export const fetchPosts = async (
   const response = await fetch(url, { signal: abortController.signal });
 
   const { data: { children, after, dist } } = await response.json();
-  const posts = fetchedPosts.concat(children);
+  const posts = fetchedPosts.concat(postsWithNeededData(children));
   const noMorePosts = dist && dist < MAX_NUM_POSTS_PER_PAGE;
 
   if (posts.length >= postAmount || noMorePosts) return posts.slice(0, postAmount);
@@ -24,7 +46,7 @@ export const fetchPosts = async (
 export const getPostsPerDay = (posts) => posts.reduce(
   (heatmap, curr) => {
     const heatmapCopy = [...heatmap];
-    const createdAt = new Date(curr.data.created_utc * 1000);
+    const createdAt = new Date(curr.createdAt.timestamp * 1000);
     const day = createdAt.getDay();
     const hour = createdAt.getHours();
 
