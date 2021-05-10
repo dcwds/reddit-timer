@@ -41,6 +41,10 @@ const theme = {
         hover: '#EEA845',
       },
     },
+    table: {
+      text: 'black',
+      border: '#DDDDDD',
+    },
   },
   size: {
     headerHeight: '6.25rem', // 100px

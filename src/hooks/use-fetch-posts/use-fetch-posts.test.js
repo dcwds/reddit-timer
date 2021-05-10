@@ -12,6 +12,24 @@ describe('useFetchPosts', () => {
     </MemoryRouter>
   );
 
+  it('loads 5 posts from reddit', async () => {
+    const { result, waitForNextUpdate } = renderHook(
+      () => useFetchPosts(), {
+        wrapper,
+        initialProps: { route: '/search/5-posts' },
+      },
+    );
+
+    expect(result.current.status).toBe('loading');
+    expect(result.current.posts).toEqual([]);
+
+    await waitForNextUpdate();
+
+    expect(result.current.status).toBe('resolved');
+    expect(result.current.posts.length).toBe(5);
+    expect(result.current.posts).toMatchSnapshot();
+  });
+
   it('loads 500 posts from reddit', async () => {
     const { result, waitForNextUpdate } = renderHook(
       () => useFetchPosts(), {
@@ -23,7 +41,7 @@ describe('useFetchPosts', () => {
     expect(result.current.status).toBe('loading');
     expect(result.current.posts).toEqual([]);
 
-    await waitForNextUpdate();
+    await waitForNextUpdate({ timeout: 10000 });
 
     expect(result.current.status).toBe('resolved');
     expect(result.current.posts.length).toBe(500);

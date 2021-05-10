@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { getPostsPerDay } from '../../hooks/use-fetch-posts';
 import useMedia from '../../hooks/use-media';
 import { breakpoint } from '../../styles/media-query';
+import PostsTable from './posts-table';
 import * as S from './heatmap.style';
 
 const readableHours = [
@@ -80,6 +81,9 @@ const Heatmap = ({ posts }) => {
   const postsPerDay = useMemo(() => getPostsPerDay(posts), [posts]);
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ');
 
+  const { day, hour } = activeCell;
+  const selectedPosts = postsPerDay[day] ? postsPerDay[day][hour] : [];
+
   return (
     <>
       <S.Heatmap>
@@ -91,11 +95,11 @@ const Heatmap = ({ posts }) => {
         </S.ReadableHours>
         {
           postsPerDay.map(
-            (postsPerHour, day) => (
+            (postsPerHour, d) => (
               <Weekday
                 // eslint-disable-next-line react/no-array-index-key
-                key={day}
-                day={day}
+                key={d}
+                day={d}
                 postsPerHour={postsPerHour}
                 activeCell={activeCell}
                 setActiveCell={setActiveCell}
@@ -110,6 +114,8 @@ const Heatmap = ({ posts }) => {
         {' '}
         <strong>{timezone}</strong>
       </S.TimezoneText>
+
+      { !!selectedPosts.length && <PostsTable posts={selectedPosts} />}
     </>
   );
 };
