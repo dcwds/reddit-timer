@@ -1,68 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
 
-## Available Scripts
+# Reddit Timer App
 
-In the project directory, you can run:
+Reddit Timer finds the best time to post on a subreddit by fetching the top 500 posts from a subreddit you provide and displaying those posts within a weekday heatmap, where posts are sorted into hours based on their creation time.
 
-### `yarn start`
+[View the app on Netlify](https://dcwds-reddittimer.netlify.app)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f55a582f-7c6f-445a-af00-3c8132ae6cf7/deploy-status)](https://app.netlify.com/sites/dcwds-reddittimer/deploys)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  <a href="https://dcwds-reddittimer.netlify.app">
+    <img
+      src="docs/reddittimer-app.png"
+      alt="Reddit Timer App - Homepage"
+      width="740"
+      style="border-radius: 12px;"
+    />
+  </a>
+</p>
 
-### `yarn test`
+## About
+The project is available in one of the courses by [Profy.dev](https://profy.dev). The course leaves the tech stack and implementation details up to the developer and simulates _real-world_ workflows through GitHub, [ClickUp](https://clickup.com) (a Kanban board), and [Figma](https://figma.com).
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Tasks are broken up into user story acceptance criteria and designs can be referenced through shared Figma files. Pull requests are created per task and are often reviewed by [Johannes Kettmann](https://jkettmann.com), a senior full-stack developer and creator of [Profy.dev](https://profy.dev).
 
-### `yarn build`
+## What I Learned
+- [Test use cases.](https://kentcdodds.com/blog/how-to-know-what-to-test) I wrote some [E2E tests for the subreddit search page](src/components/page-search/page-search.test.js).
+- Use [Mock Service Worker](https://mswjs.io) to create [handlers that return mocked responses](src/__mocks__/handlers.js) for use in testing.
+- Asynchronous tests are tricky. Tests can timeout before execution has finished, requiring the developer to [set the `timeout` duration themselves](src/components/page-search/page-search.test.js).
+- Days and hours can be represented with numbers and it's important to notice this because it [simplifies a number of operations around that data](src/hooks/use-fetch-posts/use-fetch-posts.js).
+- [CSS grid](https://developer.mozilla.org/en-US/docs/Web/CSS/grid) can sometimes be a more favorable option over [CSS flex](https://developer.mozilla.org/en-US/docs/Web/CSS/flex). Both the [heatmap](src/components/page-search/heatmap.style.js) and [posts table](src/components/page-search/posts-table.style.js) use CSS grids.
+- Use GitHub's commenting tools within a context of a pull request to discuss potential solutions inline.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech Stack
+- Bootstrapped with [Create React App](https://create-react-app.dev/)
+- Styles with [Styled Components](https://styled-components.com/)
+- Routing with [React Router](https://reactrouter.com/)
+- Testing tools with [Testing Library](https://testing-library.com/)
+- API mocking with [Mock Service Worker](https://mswjs.io)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Usage
+```sh
+# Install dependencies
+$ yarn install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Start dev server at localhost:3000
+$ yarn start
 
-### `yarn eject`
+# Build for prod
+$ yarn build
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+# Start test runner
+$ yarn test
+```
