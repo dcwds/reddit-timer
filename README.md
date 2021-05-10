@@ -1,13 +1,22 @@
+
+<h1 align="center">Reddit Timer App</h1>
+
 <p align="center">
+  Reddit Timer finds the best time to post on a subreddit by fetching the top 500 posts from a subreddit you provide and displaying those posts within a weekday heatmap, where posts are sorted into hours based on their creation time.
+</p>
 
-# Reddit Timer App
+<p align="center">
+  <a href="https://dcwds-reddittimer.netlify.app">View the app on Netlify</a><br />
 
-Reddit Timer finds the best time to post on a subreddit by fetching the top 500 posts from a subreddit you provide and displaying those posts within a weekday heatmap, where posts are sorted into hours based on their creation time.
+  <a href="https://app.netlify.com/sites/dcwds-reddittimer/deploys">
+    <img
+      alt="Netlify Status"
+      src="https://api.netlify.com/api/v1/badges/f55a582f-7c6f-445a-af00-3c8132ae6cf7/deploy-status"
+    />
+  </a>
+</p>
 
-[View the app on Netlify](https://dcwds-reddittimer.netlify.app)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f55a582f-7c6f-445a-af00-3c8132ae6cf7/deploy-status)](https://app.netlify.com/sites/dcwds-reddittimer/deploys)
-
+<p align="center">
   <a href="https://dcwds-reddittimer.netlify.app">
     <img
       src="docs/reddittimer-app.png"
